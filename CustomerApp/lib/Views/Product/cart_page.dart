@@ -1,14 +1,13 @@
 import 'package:dorTodor24/Controllers/Product/product_controller.dart';
-import 'package:dorTodor24/Helper/common_app_bar.dart';
+import 'package:dorTodor24/Helper/colors.dart';
+import 'package:dorTodor24/Helper/common_alert.dart';
 import 'package:dorTodor24/Helper/common_button.dart';
+import 'package:dorTodor24/Helper/common_card.dart';
 import 'package:dorTodor24/Helper/common_image.dart';
 import 'package:dorTodor24/Helper/string.dart';
+import 'package:dorTodor24/Views/Product/order_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../Helper/colors.dart';
-import '../../Helper/common_card.dart';
-import '../Billing/order_confirm_page.dart';
 
 class CartPage extends GetView<ProductController> {
   const CartPage({super.key});
@@ -17,67 +16,77 @@ class CartPage extends GetView<ProductController> {
   Widget build(BuildContext context) {
     return GetBuilder<ProductController>(
       builder: (controller) {
-        return CommonAppBar(
-          actionEnable: false,
-          title: 'Cart',
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const SizedBox(
-                height: 10,
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            const SizedBox(
+              height: 10,
+            ),
+            Expanded(
+              child: ListView.builder(
+                itemCount: controller.cartItems.length,
+                padding: const EdgeInsets.all(16),
+                itemBuilder: (context, index) {
+                  return cartCard(context, controller.cartItems[index]);
+                },
               ),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: controller.cartItems.length,
-                  padding: const EdgeInsets.all(16),
-                  itemBuilder: (context, index) {
-                    return cartCard(context, controller.cartItems[index]);
-                  },
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Total",
-                            style: Theme.of(context)
-                                .textTheme
-                                .headlineLarge!
-                                .copyWith(color: colors.textMain),
-                          ),
-                          const SizedBox(height: 1),
-                          Text(
-                            "315 $currencyCode",
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleLarge!
-                                .copyWith(color: colors.textMain),
-                          ),
-                        ],
-                      ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Total",
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineLarge!
+                              .copyWith(color: colors.textMain),
+                        ),
+                        const SizedBox(height: 1),
+                        Text(
+                          "${controller.cartTotal.toStringAsFixed(3)} $currencyCode",
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleLarge!
+                              .copyWith(color: colors.textMain),
+                        ),
+                      ],
                     ),
-                    CommonButton(
-                      width: 220,
-                      color: colors.themeButton,
-                      text: "Proceed to Checkout",
-                      height: 50,
-                      padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
-                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                          color: colors.white, fontWeight: FontWeight.w600),
-                      onTap: () {
-                        Get.to(() => OrderConfirmPage());
-                      },
-                    ),
-                  ],
-                ),
+                  ),
+                  CommonButton(
+                    width: 210,
+                    height: 50,
+                    color: colors.primary,
+                    text: "Proceed to Checkout",
+                    style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                        color: colors.white, fontWeight: FontWeight.w600),
+                    onTap: () {
+                      if (controller.cartItems.isNotEmpty) {
+                        Get.to(() => OrderPage());
+                      } else {
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return CommonAlert(
+                              msg:
+                                  "Your cart is empty. Add items to your cart before proceeding to checkout.",
+                              onTap: () {
+                                Get.back();
+                              },
+                            );
+                          },
+                        );
+                      }
+                    },
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         );
       },
     );
@@ -88,10 +97,7 @@ class CartPage extends GetView<ProductController> {
       boxShadowEnable: true,
       borderRadius: 12,
       margin: const EdgeInsets.only(bottom: 16),
-      child:
-          // Stack(
-          //   children: [
-          Row(
+      child: Row(
         children: [
           CommonCard(
             color: colors.cardBg,
@@ -178,19 +184,23 @@ class CartPage extends GetView<ProductController> {
                       children: [
                         if (currentIndex['proQty'] > 0)
                           CommonCard(
-                            color: colors.themeButton,
+                            color: colors.primary,
                             onTap: () {
                               if (currentIndex['proQty'] > 1) {
                                 controller.updateCart(
                                   context,
                                   currentIndex['id'],
                                   currentIndex['proQty'] - 1,
+                                  true,
+                                  0,
                                 );
                                 controller.update();
                               } else {
                                 controller.deleteCart(
                                   context,
                                   currentIndex['id'],
+                                  true,
+                                  0,
                                 );
                               }
                             },
@@ -214,12 +224,14 @@ class CartPage extends GetView<ProductController> {
                           ),
                         const SizedBox(height: 6),
                         CommonCard(
-                          color: colors.themeButton,
+                          color: colors.primary,
                           onTap: () {
                             controller.updateCart(
                               context,
                               currentIndex['id'],
                               currentIndex['proQty'] + 1,
+                              true,
+                              0,
                             );
                             controller.update();
                           },
@@ -238,20 +250,6 @@ class CartPage extends GetView<ProductController> {
           ),
         ],
       ),
-      // Positioned(
-      //   right: 5,
-      //   child: GestureDetector(
-      //     onTap: () {
-      //       debugPrint("delete");
-      //     },
-      //     child: const Padding(
-      //       padding: EdgeInsets.all(6),
-      //       child: Icon(Icons.close, size: 24),
-      //     ),
-      //   ),
-      // ),
-      // ],
-      // ),
     );
   }
 }

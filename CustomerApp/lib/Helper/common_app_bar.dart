@@ -55,9 +55,11 @@ class CommonAppBar extends StatelessWidget {
                           onPressed: () {
                             // controller.getNotification(context);
                             // Get.offAndToNamed("/home");
-                            var productController = Get.put(ProductController());
+                            var productController =
+                                Get.put(ProductController());
                             productController.getCart(context);
-                            Get.to(() => const CartPage());
+                            // Get.to(() => const CartPage());
+                            Get.offAllNamed("/home");
                             controller.currentPage = 1;
                             controller.update();
                           },

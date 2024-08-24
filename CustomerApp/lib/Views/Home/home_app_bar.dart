@@ -30,21 +30,23 @@ class _HomeAppBarState extends State<HomeAppBar> {
         return Scaffold(
           backgroundColor: colors.white,
           appBar: AppBar(
-            backgroundColor: colors.white,
-            leading: Container(),
-            leadingWidth: 0,
+            backgroundColor: colors.primary,
+            leading: Container(
+              padding: const EdgeInsets.fromLTRB(16, 0, 0, 0),
+              child: Image.asset("assets/icons/logo.png"),
+            ),
             title: Text(
-              'CP STORE',
+              'DOR TO DOR 24',
               style: Theme.of(context)
                   .textTheme
                   .titleLarge!
-                  .copyWith(color: colors.textMain),
+                  .copyWith(color: colors.white),
             ),
             actions: [
               IconButton(
                 icon: const Icon(
                   Icons.notifications,
-                  color: colors.textMain,
+                  color: colors.white,
                 ),
                 onPressed: () {
                   Get.to(() => const NotificationPage());
@@ -81,8 +83,8 @@ class _HomeAppBarState extends State<HomeAppBar> {
       },
       elevation: 0,
       backgroundColor: colors.white,
-      selectedItemColor: colors.green,
-      unselectedItemColor: colors.textMain,
+      selectedItemColor: colors.primary,
+      unselectedItemColor: colors.secondary,
       selectedLabelStyle: const TextStyle(
         fontSize: 13,
         fontWeight: FontWeight.w500,
