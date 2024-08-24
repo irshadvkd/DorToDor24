@@ -19,8 +19,10 @@ extension colors on ColorScheme {
     },
   );
 
+  // static const Color primary = Color(0xff305F61);
+  // static const Color secondary = Color(0xffFF5C59);
   static const Color primary = Color(0xff305F61);
-  static const Color secondary = Color(0xffFF5C59);
+  static const Color secondary = Color(0xffee3623);
   static const Color bgColor = Colors.white;
   static const Color cardBg = Color(0xffF7F7F7);
   static const Color bottomNav = Color(0xffFBB95B);

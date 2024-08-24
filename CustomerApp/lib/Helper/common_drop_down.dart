@@ -59,7 +59,7 @@ class CommonDropDown extends StatelessWidget {
           );
         }).toList(),
         value: selected == "" ? null : selected,
-        onChanged: onChange,
+        onChanged: enabled == false ? null : onChange,
         decoration: InputDecoration(
           filled: true,
           fillColor: colors.white,

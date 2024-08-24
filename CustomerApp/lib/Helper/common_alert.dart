@@ -6,8 +6,7 @@ class CommonAlert extends StatelessWidget {
   final double? height;
   final void Function() onTap;
   const CommonAlert(
-      {Key? key, required this.msg, this.height, required this.onTap})
-      : super(key: key);
+      {super.key, required this.msg, this.height, required this.onTap});
 
   @override
   Widget build(BuildContext context) {

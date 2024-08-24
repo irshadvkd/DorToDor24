@@ -9,7 +9,12 @@ import 'package:get/get.dart';
 
 class ProductCard extends GetView<ProductController> {
   final Map currentIndex;
-  const ProductCard({super.key, required this.currentIndex});
+  final String subCatId;
+  const ProductCard({
+    super.key,
+    required this.currentIndex,
+    required this.subCatId,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -80,15 +85,19 @@ class ProductCard extends GetView<ProductController> {
                               context,
                               currentIndex['cartId'],
                               currentIndex['qty'] - 1,
+                              false,
+                              subCatId,
                             );
-                            currentIndex['qty'] = currentIndex['qty'] - 1;
+                            // currentIndex['qty'] = currentIndex['qty'] - 1;
                             controller.update();
                           } else {
                             await controller.deleteCart(
                               context,
                               currentIndex['cartId'],
+                              false,
+                              subCatId,
                             );
-                            currentIndex['qty'] = currentIndex['qty'] - 1;
+                            // currentIndex['qty'] = currentIndex['qty'] - 1;
                           }
                         },
                         padding: const EdgeInsets.all(3),
@@ -122,15 +131,17 @@ class ProductCard extends GetView<ProductController> {
                             context,
                             currentIndex['id'],
                             currentIndex['qty'] + 1,
+                            subCatId,
                           );
-                          currentIndex['qty'] = currentIndex['qty'] + 1;
                         } else {
                           await controller.updateCart(
                             context,
                             currentIndex['cartId'],
                             currentIndex['qty'] + 1,
+                            false,
+                            subCatId,
                           );
-                          currentIndex['qty'] = currentIndex['qty'] + 1;
+                          // currentIndex['qty'] = currentIndex['qty'] + 1;
                         }
                         controller.update();
                       },

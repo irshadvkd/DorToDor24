@@ -7,7 +7,8 @@ import 'package:get/get.dart';
 
 class ProductPage extends GetView<ProductController> {
   final String title;
-  const ProductPage({super.key, required this.title});
+  final String subCatId;
+  const ProductPage({super.key, required this.title, required this.subCatId});
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +21,8 @@ class ProductPage extends GetView<ProductController> {
               Padding(
                 padding: const EdgeInsets.all(16),
                 child: CommonTextField(
-                  hintText: "Search in this category",
-                  textController: controller.searchInCategory,
+                  hintText: "Search in this product",
+                  textController: controller.searchInProduct,
                   prefixIcon: const Icon(Icons.search),
                   onChange: (value) {
                     controller.addProductToList();
@@ -34,7 +35,8 @@ class ProductPage extends GetView<ProductController> {
                   padding: const EdgeInsets.all(16),
                   child: GridView.builder(
                     itemCount: controller.product.length,
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       crossAxisSpacing: 30,
                       mainAxisSpacing: 20,
@@ -43,7 +45,10 @@ class ProductPage extends GetView<ProductController> {
                     shrinkWrap: true,
                     padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
                     itemBuilder: (context, index) {
-                      return ProductCard(currentIndex: controller.product[index]);
+                      return ProductCard(
+                        currentIndex: controller.product[index],
+                        subCatId: subCatId,
+                      );
                     },
                   ),
                 ),

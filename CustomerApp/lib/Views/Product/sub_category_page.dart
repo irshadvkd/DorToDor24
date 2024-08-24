@@ -30,28 +30,24 @@ class SubCategoryPage extends GetView<ProductController> {
                         height: 4,
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(
-                            left: 24, right: 24, bottom: 10),
+                        padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              "Let's find food here",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headlineLarge!
-                                  .copyWith(
-                                      color: colors.themeButton, fontSize: 24),
-                            ),
+                            // Text(
+                            //   "Let's find food here",
+                            //   style: Theme.of(context)
+                            //       .textTheme
+                            //       .headlineLarge!
+                            //       .copyWith(
+                            //           color: colors.themeButton, fontSize: 24),
+                            // ),
                             CommonTextField(
-                              hintText: "Search in this category",
-                              textController: controller.searchInCategory,
+                              hintText: "Search in this sub category",
+                              textController: controller.searchInSubCategory,
                               prefixIcon: const Icon(Icons.search),
                               onChange: (value) {
-                                final productController =
-                                    Get.put(ProductController());
-                                // productController.getProduct(context, 0);
-                                Get.to(() => const ProductSearchPage());
+                                controller.addSubCategoryToList();
                               },
                             ),
                           ],
@@ -117,11 +113,14 @@ class SubCategoryPage extends GetView<ProductController> {
       boxShadowEnable: false,
       onTap: () {
         final productController = Get.put(ProductController());
-        productController.getProduct(context,  currentIndex['id']);
+        productController.searchInProduct.clear();
+        productController.getProduct(context, currentIndex['id']);
         Get.to(() => ProductPage(
-            title: Get.locale!.languageCode == "en"
-                ? currentIndex['nameEng']
-                : currentIndex['nameAr']));
+              title: Get.locale!.languageCode == "en"
+                  ? currentIndex['nameEng']
+                  : currentIndex['nameAr'],
+              subCatId: currentIndex['id'],
+            ));
       },
       child: Container(
         width: MediaQuery.of(context).size.width / 2 - 20,

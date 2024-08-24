@@ -38,21 +38,21 @@ class HomePage extends GetView<HomeController> {
                             .headlineLarge!
                             .copyWith(color: colors.themeButton, fontSize: 24),
                       ),
-                      const SizedBox(height: 8),
-                      CommonTextField(
-                        hintText: "Search now....",
-                        textController: productController.searchInCategory,
-                        prefixIcon: const Icon(
-                          Icons.search,
-                          size: 24,
-                        ),
-                        onChange: (value) {
-                          final productController =
-                              Get.put(ProductController());
-                          // productController.getProduct(context, 0);
-                          Get.to(() => const ProductSearchPage());
-                        },
-                      ),
+                      // const SizedBox(height: 8),
+                      // CommonTextField(
+                      //   hintText: "Search now....",
+                      //   textController: productController.searchInCategory,
+                      //   prefixIcon: const Icon(
+                      //     Icons.search,
+                      //     size: 24,
+                      //   ),
+                      //   onChange: (value) {
+                      //     // final productController =
+                      //     //     Get.put(ProductController());
+                      //     // // productController.getProduct(context, 0);
+                      //     // Get.to(() => const ProductSearchPage());
+                      //   },
+                      // ),
                     ],
                   ),
                 ),
@@ -114,6 +114,7 @@ class HomePage extends GetView<HomeController> {
       boxShadowEnable: false,
       onTap: () {
         final productController = Get.put(ProductController());
+        productController.searchInSubCategory.clear();
         productController.getSubCategory(context, currentIndex['id']);
         Get.to(() => SubCategoryPage(
               catId: currentIndex['id'].toString(),

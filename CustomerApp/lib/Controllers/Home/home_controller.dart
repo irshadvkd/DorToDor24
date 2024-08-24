@@ -56,7 +56,7 @@ class HomeController extends GetxController {
   HomeModal? homeModal;
   Future getHome(context) async {
     isNetworkAvail = await isNetworkAvailable();
-    if (isNetworkAvail) {
+    // if (isNetworkAvail) {
       homeLoader = false;
       update();
       var response = await getAPI(context, "home/user?userId=1");
@@ -68,14 +68,14 @@ class HomeController extends GetxController {
         addCartToList();
       }
       homeLoader = true;
-    }
+    // }
     update();
   }
 
   LocationModal? locationModal;
   Future getLocation(context) async {
     isNetworkAvail = await isNetworkAvailable();
-    if (isNetworkAvail) {
+    // if (isNetworkAvail) {
       // homeLoader = false;
       // update();
       var response = await getAPI(context, "location/get");
@@ -89,7 +89,7 @@ class HomeController extends GetxController {
             "nameAr": item.nameAr,
           });
         }
-      }
+      // }
       // homeLoader = true;
     }
     update();
