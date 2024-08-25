@@ -8,6 +8,8 @@ import 'package:dorTodor24/Views/Product/cart_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../Auth/place_page.dart';
+
 class HomeAppBar extends StatefulWidget {
   const HomeAppBar({super.key});
 
@@ -43,6 +45,15 @@ class _HomeAppBarState extends State<HomeAppBar> {
                   .copyWith(color: colors.white),
             ),
             actions: [
+              IconButton(
+                icon: const Icon(
+                  Icons.location_city,
+                  color: colors.white,
+                ),
+                onPressed: () {
+                  Get.to(() => const PlaceSelectPage());
+                },
+              ),
               IconButton(
                 icon: const Icon(
                   Icons.notifications,
