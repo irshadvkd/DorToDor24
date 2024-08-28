@@ -65,7 +65,7 @@ class ProductCard extends GetView<ProductController> {
                       style: Theme.of(context)
                           .textTheme
                           .titleLarge!
-                          .copyWith(fontSize: 12, color: colors.primary),
+                          .copyWith(fontSize: 16, color: colors.green),
                     ),
                   ],
                 ),
@@ -104,13 +104,14 @@ class ProductCard extends GetView<ProductController> {
                         child: const Icon(
                           Icons.remove,
                           color: colors.white,
+                          size: 35,
                         ),
                       ),
                     const SizedBox(height: 4),
                     if (currentIndex['qty'] > 0)
                       CommonCard(
-                        height: 30,
-                        width: 30,
+                        height: 40,
+                        width: 40,
                         color: colors.themeButton,
                         child: Center(
                           child: Text(
@@ -149,6 +150,7 @@ class ProductCard extends GetView<ProductController> {
                       child: const Icon(
                         Icons.add,
                         color: colors.white,
+                        size: 35,
                       ),
                     ),
                   ],

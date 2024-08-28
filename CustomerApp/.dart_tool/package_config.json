@@ -200,6 +200,12 @@
       "languageVersion": "3.2"
     },
     {
+      "name": "flutter_slidable",
+      "rootUri": "file:///C:/Users/ASUS/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_slidable-3.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "flutter_svg",
       "rootUri": "file:///C:/Users/ASUS/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_svg-2.0.10+1",
       "packageUri": "lib/",
@@ -614,7 +620,7 @@
       "languageVersion": "3.5"
     }
   ],
-  "generated": "2024-08-25T17:08:05.810626Z",
+  "generated": "2024-08-28T14:26:21.178969Z",
   "generator": "pub",
   "generatorVersion": "3.5.1",
   "flutterRoot": "file:///C:/Flutter/flutter",

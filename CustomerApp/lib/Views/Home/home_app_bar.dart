@@ -25,6 +25,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
     super.initState();
   }
 
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(

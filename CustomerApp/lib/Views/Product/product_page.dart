@@ -1,9 +1,13 @@
 import 'package:dorTodor24/Controllers/Product/product_controller.dart';
 import 'package:dorTodor24/Helper/common_app_bar.dart';
 import 'package:dorTodor24/Helper/common_text_field.dart';
+import 'package:dorTodor24/Views/Home/home_app_bar.dart';
 import 'package:dorTodor24/Views/Product/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../Helper/colors.dart';
+import 'cart_page.dart';
 
 class ProductPage extends GetView<ProductController> {
   final String title;
@@ -53,6 +57,60 @@ class ProductPage extends GetView<ProductController> {
                   ),
                 ),
               ),
+              // SizedBox(
+              //   height: 80,
+              //   width: MediaQuery.of(context).size.width,
+              //   child: Padding(
+              //     padding: const EdgeInsets.all(10),
+              //     child: Row(
+              //       crossAxisAlignment: CrossAxisAlignment.center,
+              //       mainAxisAlignment: MainAxisAlignment.end,
+              //       children: [
+              //         GestureDetector(
+              //           onTap: () {
+              //             // controller.getNotification(context);
+              //             // Get.offAndToNamed("/home");
+              //             // var productController =
+              //             // Get.put(ProductController());
+              //             // productController.getCart(context);
+              //             // Get.to(() => const CartPage());
+              //             // Get.offAllNamed("/home");
+              //             // controller.currentPage = 1;
+              //             // controller.update();
+              //           },
+              //           child: Container(
+              //             height: 57,
+              //             width: 220,
+              //             decoration: BoxDecoration(
+              //               color: colors.themeButton,
+              //               borderRadius: BorderRadius.circular(12),
+              //             ),
+              //             child: Padding(
+              //               padding: const EdgeInsets.only(left: 22, right: 22),
+              //               child: Row(
+              //                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //                 children: [
+              //                   Text(
+              //                     'Go to Cart',
+              //                     style: Theme.of(context)
+              //                         .textTheme
+              //                         .titleLarge!
+              //                         .copyWith(
+              //                         fontSize: 20, color: colors.white),
+              //                   ),
+              //                   const Icon(
+              //                     Icons.shopping_cart,
+              //                     color: colors.white,
+              //                   )
+              //                 ],
+              //               ),
+              //             ),
+              //           ),
+              //         ),
+              //       ],
+              //     ),
+              //   ),
+              // ),
             ],
           ),
         );
