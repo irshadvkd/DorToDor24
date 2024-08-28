@@ -104,13 +104,12 @@ class ProductCard extends GetView<ProductController> {
                         child: const Icon(
                           Icons.remove,
                           color: colors.white,
-                          size: 35,
                         ),
                       ),
                     const SizedBox(height: 4),
                     if (currentIndex['qty'] > 0)
                       CommonCard(
-                        height: 40,
+                        height: 30,
                         width: 40,
                         color: colors.themeButton,
                         child: Center(
@@ -150,7 +149,6 @@ class ProductCard extends GetView<ProductController> {
                       child: const Icon(
                         Icons.add,
                         color: colors.white,
-                        size: 35,
                       ),
                     ),
                   ],
