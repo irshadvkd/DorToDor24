@@ -65,7 +65,7 @@ class ProductCard extends GetView<ProductController> {
                       style: Theme.of(context)
                           .textTheme
                           .titleLarge!
-                          .copyWith(fontSize: 12, color: colors.primary),
+                          .copyWith(fontSize: 16, color: colors.green),
                     ),
                   ],
                 ),
@@ -110,7 +110,7 @@ class ProductCard extends GetView<ProductController> {
                     if (currentIndex['qty'] > 0)
                       CommonCard(
                         height: 30,
-                        width: 30,
+                        width: 40,
                         color: colors.themeButton,
                         child: Center(
                           child: Text(

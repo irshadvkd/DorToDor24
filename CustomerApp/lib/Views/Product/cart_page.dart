@@ -7,6 +7,7 @@ import 'package:dorTodor24/Helper/common_image.dart';
 import 'package:dorTodor24/Helper/string.dart';
 import 'package:dorTodor24/Views/Product/order_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 
 class CartPage extends GetView<ProductController> {
@@ -93,162 +94,184 @@ class CartPage extends GetView<ProductController> {
   }
 
   Widget cartCard(context, currentIndex) {
-    return CommonCard(
-      boxShadowEnable: true,
-      borderRadius: 12,
-      margin: const EdgeInsets.only(bottom: 16),
-      child: Row(
+    return Slidable(
+      startActionPane: ActionPane(
+        motion: const ScrollMotion(),
         children: [
-          CommonCard(
-            color: colors.cardBg,
-            boxShadowEnable: false,
-            margin: const EdgeInsets.fromLTRB(8, 8, 16, 8),
-            width: 120,
-            child: AspectRatio(
-              aspectRatio: 4 / 3,
-              child: CommonImage(
-                url: currentIndex['image'],
-                fit: BoxFit.contain,
+          SlidableAction(
+            onPressed: (BuildContext context) {
+              context;
+              controller.deleteCart(
+                context,
+                currentIndex['id'],
+                true,
+                0,
+              );
+            },
+            backgroundColor: Colors.transparent,
+            foregroundColor: Colors.red,
+            icon: Icons.delete,
+            label: 'Delete',
+          ),
+        ],
+      ),
+      child: CommonCard(
+        boxShadowEnable: true,
+        borderRadius: 12,
+        margin: const EdgeInsets.only(bottom: 16),
+        child: Row(
+          children: [
+            CommonCard(
+              color: Colors.transparent,
+              boxShadowEnable: false,
+              margin: const EdgeInsets.fromLTRB(8, 8, 16, 8),
+              width: 120,
+              child: AspectRatio(
+                aspectRatio: 4 / 3,
+                child: CommonImage(
+                  url: currentIndex['image'],
+                  fit: BoxFit.contain,
+                ),
               ),
             ),
-          ),
-          Expanded(
-            child: Row(
-              children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Text(
-                              Get.locale!.languageCode == "en"
-                                  ? currentIndex['nameEng']
-                                  : currentIndex['nameAr'],
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headlineLarge!
-                                  .copyWith(color: colors.textMain),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                          const SizedBox(width: 30),
-                        ],
-                      ),
-                      const SizedBox(height: 4),
-                      Row(
-                        children: [
-                          Text(
-                            "Price",
-                            style: Theme.of(context)
-                                .textTheme
-                                .headlineMedium!
-                                .copyWith(color: colors.textMain),
-                          ),
-                          const Text("  :  "),
-                          Text(
-                            "${currentIndex['price']} $currencyCode",
-                            style: Theme.of(context)
-                                .textTheme
-                                .headlineMedium!
-                                .copyWith(color: colors.textMain),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 10),
-                      Text(
-                        "Total",
-                        style: Theme.of(context)
-                            .textTheme
-                            .headlineSmall!
-                            .copyWith(fontWeight: FontWeight.bold),
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        "${(double.parse(currentIndex['price']) * currentIndex['proQty']).toStringAsFixed(2)} $currencyCode",
-                        style: Theme.of(context).textTheme.headlineSmall,
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 6),
-                  child: SizedBox(
-                    // width: 80,
+            Expanded(
+              child: Row(
+                children: [
+                  Expanded(
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        if (currentIndex['proQty'] > 0)
-                          CommonCard(
-                            color: colors.primary,
-                            onTap: () {
-                              if (currentIndex['proQty'] > 1) {
-                                controller.updateCart(
-                                  context,
-                                  currentIndex['id'],
-                                  currentIndex['proQty'] - 1,
-                                  true,
-                                  0,
-                                );
-                                controller.update();
-                              } else {
-                                controller.deleteCart(
-                                  context,
-                                  currentIndex['id'],
-                                  true,
-                                  0,
-                                );
-                              }
-                            },
-                            padding: const EdgeInsets.all(3),
-                            child: const Icon(
-                              Icons.remove,
-                              color: colors.white,
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                Get.locale!.languageCode == "en"
+                                    ? currentIndex['nameEng']
+                                    : currentIndex['nameAr'],
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headlineLarge!
+                                    .copyWith(color: colors.textMain),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
                             ),
-                          ),
-                        const SizedBox(height: 6),
-                        if (currentIndex['proQty'] > 0)
-                          Padding(
-                            padding: const EdgeInsets.only(right: 8),
-                            child: Text(
-                              "${currentIndex['proQty']}",
+                            const SizedBox(width: 30),
+                          ],
+                        ),
+                        const SizedBox(height: 4),
+                        Row(
+                          children: [
+                            Text(
+                              "Price",
                               style: Theme.of(context)
                                   .textTheme
-                                  .titleLarge!
+                                  .headlineMedium!
                                   .copyWith(color: colors.textMain),
                             ),
-                          ),
-                        const SizedBox(height: 6),
-                        CommonCard(
-                          color: colors.primary,
-                          onTap: () {
-                            controller.updateCart(
-                              context,
-                              currentIndex['id'],
-                              currentIndex['proQty'] + 1,
-                              true,
-                              0,
-                            );
-                            controller.update();
-                          },
-                          padding: const EdgeInsets.all(3),
-                          child: const Icon(
-                            Icons.add,
-                            color: colors.white,
-                          ),
+                            const Text("  :  "),
+                            Text(
+                              "${currentIndex['price']} $currencyCode",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headlineMedium!
+                                  .copyWith(color: colors.textMain),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 10),
+                        Text(
+                          "Total",
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineSmall!
+                              .copyWith(fontWeight: FontWeight.bold),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          "${(double.parse(currentIndex['price']) * currentIndex['proQty']).toStringAsFixed(2)} $currencyCode",
+                          style: Theme.of(context).textTheme.headlineSmall,
                         ),
                       ],
                     ),
                   ),
-                )
-              ],
+                  Padding(
+                    padding: const EdgeInsets.only(right: 6),
+                    child: SizedBox(
+                      // width: 80,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          if (currentIndex['proQty'] > 0)
+                            CommonCard(
+                              color: colors.primary,
+                              onTap: () {
+                                if (currentIndex['proQty'] > 1) {
+                                  controller.updateCart(
+                                    context,
+                                    currentIndex['id'],
+                                    currentIndex['proQty'] - 1,
+                                    true,
+                                    0,
+                                  );
+                                  controller.update();
+                                } else {
+                                  controller.deleteCart(
+                                    context,
+                                    currentIndex['id'],
+                                    true,
+                                    0,
+                                  );
+                                }
+                              },
+                              padding: const EdgeInsets.all(3),
+                              child: const Icon(
+                                Icons.remove,
+                                color: colors.white,
+                              ),
+                            ),
+                          const SizedBox(height: 6),
+                          if (currentIndex['proQty'] > 0)
+                            Padding(
+                              padding: const EdgeInsets.only(right: 8),
+                              child: Text(
+                                "${currentIndex['proQty']}",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleLarge!
+                                    .copyWith(color: colors.textMain),
+                              ),
+                            ),
+                          const SizedBox(height: 6),
+                          CommonCard(
+                            color: colors.primary,
+                            onTap: () {
+                              controller.updateCart(
+                                context,
+                                currentIndex['id'],
+                                currentIndex['proQty'] + 1,
+                                true,
+                                0,
+                              );
+                              controller.update();
+                            },
+                            padding: const EdgeInsets.all(3),
+                            child: const Icon(
+                              Icons.add,
+                              color: colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
