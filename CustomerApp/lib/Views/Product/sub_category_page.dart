@@ -125,7 +125,8 @@ class SubCategoryPage extends GetView<ProductController> {
       child: Container(
         width: MediaQuery.of(context).size.width / 2 - 20,
         height: MediaQuery.of(context).size.height / 2 - 20,
-        color: colors.cardBg,
+        // color: colors.cardBg,
+        color: Colors.transparent,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -140,7 +141,8 @@ class SubCategoryPage extends GetView<ProductController> {
               padding: const EdgeInsets.only(bottom: 20),
               alignment: Alignment.center,
               width: MediaQuery.of(context).size.width / 2 - 24,
-              color: colors.cardBg,
+              // color: colors.cardBg,
+              color: Colors.transparent,
               child: Text(
                 Get.locale!.languageCode == "en"
                     ? currentIndex['nameEng']
@@ -150,6 +152,7 @@ class SubCategoryPage extends GetView<ProductController> {
                     .titleLarge!
                     .copyWith(fontSize: 16),
                 textAlign: TextAlign.center,
+                overflow: TextOverflow.ellipsis,
               ),
             ),
           ],
