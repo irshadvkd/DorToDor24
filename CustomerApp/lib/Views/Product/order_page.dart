@@ -18,7 +18,7 @@ class OrderPage extends GetView<ProductController> {
   Widget build(BuildContext context) {
     final homeController = Get.put(HomeController());
     return CommonAppBar(
-      title: "Order Page",
+      title: "Delivery Information",
       actionEnable: false,
       child: GetBuilder<ProductController>(
         builder: (controller) {
@@ -28,11 +28,8 @@ class OrderPage extends GetView<ProductController> {
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'Delivery Information',
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0, 16, 0, 16),
                       child: CommonDropDown(
@@ -64,23 +61,23 @@ class OrderPage extends GetView<ProductController> {
                       ),
                     ),
                     CommonTextField(
-                      hintText: 'Building Number',
-                      textController: controller.buildingNo,
+                      hintText: 'Street',
+                      textController: controller.address,
+                      maxLines: 1,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Please enter your building number';
+                          return 'Please enter your Street';
                         }
                         return null;
                       },
                     ),
                     const SizedBox(height: 16),
                     CommonTextField(
-                      hintText: 'Address',
-                      textController: controller.address,
-                      maxLines: 3,
+                      hintText: 'Building Number',
+                      textController: controller.buildingNo,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Please enter your address';
+                          return 'Please enter your building number';
                         }
                         return null;
                       },
@@ -104,7 +101,7 @@ class OrderPage extends GetView<ProductController> {
                     CommonTextField(
                       hintText: 'Delivery Note (Optional)',
                       textController: controller.deliveryNote,
-                      maxLines: 4,
+                      maxLines: 3,
                     ),
                     const SizedBox(height: 16),
                     Container(
@@ -122,6 +119,66 @@ class OrderPage extends GetView<ProductController> {
                         value: controller.isCashOnDelivery,
                         title: Text(
                           'Cash on Delivery',
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleSmall!
+                              .copyWith(
+                                  color: controller.isCashOnDelivery
+                                      ? colors.white
+                                      : colors.textMain),
+                        ),
+                        onChanged: (newValue) {
+                          controller.isCashOnDelivery = true;
+                          controller.update();
+                        },
+                      ),
+                    ),
+                    const SizedBox(height: 5),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: controller.isCashOnDelivery
+                            ? colors.primary
+                            : Colors.grey[200],
+                        border: Border.all(color: colors.borderColor),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      child: CheckboxListTile(
+                        controlAffinity: ListTileControlAffinity.leading,
+                        activeColor: colors.white,
+                        checkColor: colors.secondary,
+                        value: controller.isCashOnDelivery,
+                        title: Text(
+                          'KNET',
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleSmall!
+                              .copyWith(
+                                  color: controller.isCashOnDelivery
+                                      ? colors.white
+                                      : colors.textMain),
+                        ),
+                        onChanged: (newValue) {
+                          controller.isCashOnDelivery = true;
+                          controller.update();
+                        },
+                      ),
+                    ),
+                    const SizedBox(height: 5),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: controller.isCashOnDelivery
+                            ? colors.primary
+                            : Colors.grey[200],
+                        border: Border.all(color: colors.borderColor),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      child: CheckboxListTile(
+                        controlAffinity: ListTileControlAffinity.leading,
+                        activeColor: colors.white,
+                        checkColor: colors.secondary,
+                        value: controller.isCashOnDelivery,
+                        title: Text(
+                          'Link',
                           style: Theme.of(context)
                               .textTheme
                               .titleSmall!
