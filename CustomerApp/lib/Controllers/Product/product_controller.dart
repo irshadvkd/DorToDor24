@@ -12,6 +12,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../Helper/colors.dart';
+import '../../Views/Billing/order_success_widget.dart';
+
 class ProductController extends GetxController {
   TextEditingController searchInSubCategory = TextEditingController();
   TextEditingController searchInProduct = TextEditingController();
@@ -304,6 +307,27 @@ class ProductController extends GetxController {
     );
     if (response['status'] == true) {
       // var orderModal = OrderModal.fromJson(response['body']);
+      // void showOrderSuccessPopup(BuildContext context) {
+      //   showModalBottomSheet(
+      //     context: context,
+      //     isScrollControlled: true,
+      //     backgroundColor: Colors.transparent,
+      //     builder: (context) => Container(
+      //       width: MediaQuery.of(context).size.width,
+      //       height: 400,
+      //       color: colors.orange,
+      //       child: ClipRRect(
+      //         borderRadius:
+      //             const BorderRadius.vertical(top: Radius.circular(200)),
+      //         child: Container(
+      //           height: 300,
+      //           color: colors.white,
+      //           child: const OrderSuccessPopup(),
+      //         ),
+      //       ),
+      //     ),
+      //   );
+      // }
       showDialog(
         context: context,
         barrierDismissible: false,
