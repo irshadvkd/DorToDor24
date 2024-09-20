@@ -200,6 +200,12 @@
       "languageVersion": "3.2"
     },
     {
+      "name": "flutter_slidable",
+      "rootUri": "file:///Users/mohammedvc/.pub-cache/hosted/pub.dev/flutter_slidable-3.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "flutter_svg",
       "rootUri": "file:///Users/mohammedvc/.pub-cache/hosted/pub.dev/flutter_svg-2.0.10+1",
       "packageUri": "lib/",
@@ -614,7 +620,7 @@
       "languageVersion": "3.5"
     }
   ],
-  "generated": "2024-08-30T12:05:44.560771Z",
+  "generated": "2024-09-15T13:21:57.652528Z",
   "generator": "pub",
   "generatorVersion": "3.5.1",
   "flutterRoot": "file:///Applications/flutter",
