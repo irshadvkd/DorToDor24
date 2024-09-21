@@ -8,6 +8,7 @@ import 'package:dorTodor24/Helper/string.dart';
 import 'package:dorTodor24/Modals/Product/cart_modal.dart' as cart;
 import 'package:dorTodor24/Modals/Product/product_modal.dart';
 import 'package:dorTodor24/Modals/Product/sub_category_modal.dart';
+import 'package:dorTodor24/Views/Billing/order_success_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -333,23 +334,33 @@ class ProductController extends GetxController {
       //     ),
       //   );
       // }
-      showDialog(
+      // showDialog(
+      //   context: context,
+      //   barrierDismissible: false,
+      //   builder: (context) {
+      //     return PopScope(
+      //       canPop: false,
+      //       child: CommonAlert(
+      //         msg: "Your order has been successfully placed!",
+      //         onTap: () {
+      //           final homeController = Get.put(HomeController());
+      //           homeController.currentPage = 0;
+      //           cartTotal = 0;
+      //           Get.offAllNamed("/home");
+      //         },
+      //       ),
+      //     );
+      //   },
+      // );
+      showModalBottomSheet(
         context: context,
-        barrierDismissible: false,
-        builder: (context) {
-          return PopScope(
-            canPop: false,
-            child: CommonAlert(
-              msg: "Your order has been successfully placed!",
-              onTap: () {
-                final homeController = Get.put(HomeController());
-                homeController.currentPage = 0;
-                cartTotal = 0;
-                Get.offAllNamed("/home");
-              },
-            ),
-          );
-        },
+        isScrollControlled: true,
+        backgroundColor: Colors.transparent,
+        builder: (context) => Container(
+          height: 400,
+          color: Colors.transparent,
+          child: const OrderSuccessPopup(),
+        ),
       );
     }
     orderLoader = true;
