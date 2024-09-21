@@ -84,8 +84,7 @@ class CartPage extends GetView<CartController> {
                     .copyWith(color: colors.white, fontWeight: FontWeight.w600),
                 onTap: () {
                   if (controller.cartItems.isNotEmpty) {
-
-                    Get.to(() => OrderPage());
+                    Get.to(() => const OrderPage());
                   } else {
                     showDialog(
                       context: context,
@@ -233,6 +232,12 @@ class CartPage extends GetView<CartController> {
                                   //   true,
                                   //   0,
                                   // );
+                                  final cartController =
+                                      Get.put(CartController());
+                                  currentIndex.proQty =
+                                      currentIndex.proQty! - 1;
+                                  cartController.addToCart(
+                                      context, currentIndex, 0, true);
                                   controller.update();
                                 } else {
                                   // controller.deleteCart(
@@ -241,6 +246,9 @@ class CartPage extends GetView<CartController> {
                                   //   true,
                                   //   0,
                                   // );
+                                  controller.removeFromCart(
+                                      context, currentIndex.id!, 0, true);
+                                  controller.update();
                                 }
                               },
                               padding: const EdgeInsets.all(3),
@@ -265,13 +273,12 @@ class CartPage extends GetView<CartController> {
                           CommonCard(
                             color: colors.primary,
                             onTap: () {
-                              // controller.updateCart(
-                              //   context,
-                              //   currentIndex['id'],
-                              //   currentIndex['proQty'] + 1,
-                              //   true,
-                              //   0,
-                              // );
+                              final cartController =
+                              Get.put(CartController());
+                              currentIndex.proQty =
+                                  currentIndex.proQty! + 1;
+                              cartController.addToCart(
+                                  context, currentIndex, 0, true);
                               controller.update();
                             },
                             padding: const EdgeInsets.all(3),
