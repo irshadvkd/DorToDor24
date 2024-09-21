@@ -1,3 +1,4 @@
+import 'package:dorTodor24/Controllers/Cart/cart_controller.dart';
 import 'package:dorTodor24/Controllers/Home/home_controller.dart';
 import 'package:dorTodor24/Controllers/Product/product_controller.dart';
 import 'package:dorTodor24/Helper/colors.dart';
@@ -72,7 +73,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
             child: controller.currentPage == 0
                 ? const HomePage()
                 : controller.currentPage == 1
-                    ? const CartPage()
+                    ? const CartPage(hideAppBar: true)
                     : const MenuPage(),
           ),
           bottomNavigationBar: bottomNavigationBar(context),
@@ -88,8 +89,8 @@ class _HomeAppBarState extends State<HomeAppBar> {
       onTap: (index) {
         controller.currentPage = index;
         if (index == 1) {
-          var productController = Get.put(ProductController());
-          productController.getCart(context);
+          var cartController = Get.put(CartController());
+          cartController.loadCartFromSession();
         }
         controller.update();
       },
