@@ -1,6 +1,5 @@
 import 'package:dorTodor24/Controllers/Cart/cart_controller.dart';
 import 'package:dorTodor24/Controllers/Home/home_controller.dart';
-import 'package:dorTodor24/Controllers/Product/product_controller.dart';
 import 'package:dorTodor24/Helper/colors.dart';
 import 'package:dorTodor24/Views/Home/home_page.dart';
 import 'package:dorTodor24/Views/Home/notification_page.dart';

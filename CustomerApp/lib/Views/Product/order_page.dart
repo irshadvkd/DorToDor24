@@ -5,15 +5,27 @@ import 'package:dorTodor24/Helper/common_app_bar.dart';
 import 'package:dorTodor24/Helper/common_button.dart';
 import 'package:dorTodor24/Helper/common_drop_down.dart';
 import 'package:dorTodor24/Helper/common_text_field.dart';
-import 'package:dorTodor24/Views/Billing/order_confirm_page.dart';
 import 'package:dorTodor24/Views/Product/order_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-class OrderPage extends GetView<ProductController> {
-  OrderPage({super.key});
+class OrderPage extends StatefulWidget {
+  const OrderPage({super.key});
+
+  @override
+  State<OrderPage> createState() => _OrderPageState();
+}
+
+class _OrderPageState extends State<OrderPage> {
   final _formKey = GlobalKey<FormState>();
+  @override
+  void initState() {
+    final productController = Get.put(ProductController());
+    productController.paymentMethod = "1";
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final homeController = Get.put(HomeController());
@@ -106,7 +118,7 @@ class OrderPage extends GetView<ProductController> {
                     const SizedBox(height: 16),
                     Container(
                       decoration: BoxDecoration(
-                        color: controller.isCashOnDelivery
+                        color: controller.paymentMethod == "1"
                             ? colors.primary
                             : Colors.grey[200],
                         border: Border.all(color: colors.borderColor),
@@ -116,19 +128,19 @@ class OrderPage extends GetView<ProductController> {
                         controlAffinity: ListTileControlAffinity.leading,
                         activeColor: colors.white,
                         checkColor: colors.secondary,
-                        value: controller.isCashOnDelivery,
+                        value: controller.paymentMethod == "1",
                         title: Text(
                           'Cash on Delivery',
                           style: Theme.of(context)
                               .textTheme
                               .titleSmall!
                               .copyWith(
-                                  color: controller.isCashOnDelivery
+                                  color: controller.paymentMethod == "1"
                                       ? colors.white
                                       : colors.textMain),
                         ),
                         onChanged: (newValue) {
-                          controller.isCashOnDelivery = true;
+                          controller.paymentMethod = "1";
                           controller.update();
                         },
                       ),
@@ -136,7 +148,7 @@ class OrderPage extends GetView<ProductController> {
                     const SizedBox(height: 5),
                     Container(
                       decoration: BoxDecoration(
-                        color: controller.isCashOnDelivery
+                        color: controller.paymentMethod == "2"
                             ? colors.primary
                             : Colors.grey[200],
                         border: Border.all(color: colors.borderColor),
@@ -146,19 +158,19 @@ class OrderPage extends GetView<ProductController> {
                         controlAffinity: ListTileControlAffinity.leading,
                         activeColor: colors.white,
                         checkColor: colors.secondary,
-                        value: controller.isCashOnDelivery,
+                        value: controller.paymentMethod == "2",
                         title: Text(
                           'KNET',
                           style: Theme.of(context)
                               .textTheme
                               .titleSmall!
                               .copyWith(
-                                  color: controller.isCashOnDelivery
+                                  color: controller.paymentMethod == "2"
                                       ? colors.white
                                       : colors.textMain),
                         ),
                         onChanged: (newValue) {
-                          controller.isCashOnDelivery = true;
+                          controller.paymentMethod = "2";
                           controller.update();
                         },
                       ),
@@ -166,7 +178,7 @@ class OrderPage extends GetView<ProductController> {
                     const SizedBox(height: 5),
                     Container(
                       decoration: BoxDecoration(
-                        color: controller.isCashOnDelivery
+                        color: controller.paymentMethod == "3"
                             ? colors.primary
                             : Colors.grey[200],
                         border: Border.all(color: colors.borderColor),
@@ -176,19 +188,21 @@ class OrderPage extends GetView<ProductController> {
                         controlAffinity: ListTileControlAffinity.leading,
                         activeColor: colors.white,
                         checkColor: colors.secondary,
-                        value: controller.isCashOnDelivery,
+                        value: controller.paymentMethod == "3",
                         title: Text(
                           'Link',
                           style: Theme.of(context)
                               .textTheme
                               .titleSmall!
                               .copyWith(
-                                  color: controller.isCashOnDelivery
+                                  color: controller.paymentMethod == "3"
                                       ? colors.white
                                       : colors.textMain),
                         ),
                         onChanged: (newValue) {
-                          controller.isCashOnDelivery = true;
+                          print(newValue);
+                          controller.paymentMethod = "3";
+                          print(controller.paymentMethod);
                           controller.update();
                         },
                       ),

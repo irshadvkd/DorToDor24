@@ -84,6 +84,7 @@ class CartPage extends GetView<CartController> {
                     .copyWith(color: colors.white, fontWeight: FontWeight.w600),
                 onTap: () {
                   if (controller.cartItems.isNotEmpty) {
+
                     Get.to(() => OrderPage());
                   } else {
                     showDialog(

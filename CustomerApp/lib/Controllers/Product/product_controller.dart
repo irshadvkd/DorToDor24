@@ -5,16 +5,11 @@ import 'package:dorTodor24/Controllers/Home/home_controller.dart';
 import 'package:dorTodor24/Helper/common_alert.dart';
 import 'package:dorTodor24/Helper/session.dart';
 import 'package:dorTodor24/Helper/string.dart';
-import 'package:dorTodor24/Modals/Product/cart_modal.dart';
 import 'package:dorTodor24/Modals/Product/cart_modal.dart' as cart;
-import 'package:dorTodor24/Modals/Product/order_modal.dart';
 import 'package:dorTodor24/Modals/Product/product_modal.dart';
 import 'package:dorTodor24/Modals/Product/sub_category_modal.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../Helper/colors.dart';
-import '../../Views/Billing/order_success_widget.dart';
 
 class ProductController extends GetxController {
   TextEditingController searchInSubCategory = TextEditingController();
@@ -30,7 +25,8 @@ class ProductController extends GetxController {
   bool subCategoryLoader = true;
   bool productLoader = true;
   bool orderLoader = true;
-  bool isCashOnDelivery = true;
+  // bool isCashOnDelivery = true;
+  String paymentMethod = "";
 
   List subCategory = [];
   List product = [];
