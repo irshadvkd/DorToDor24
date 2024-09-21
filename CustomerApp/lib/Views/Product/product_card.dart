@@ -62,7 +62,7 @@ class ProductCard extends GetView<ProductController> {
                             data.proQty = currentIndex['qty'] + 1;
                             data.id = cartId;
                             data.productId = int.parse(currentIndex['id']);
-                            cartController.addToCart(context, data, subCatId);
+                            cartController.addToCart(context, data, subCatId,false);
                           } else {
                             // await controller.updateCart(
                             //   context,
@@ -75,7 +75,7 @@ class ProductCard extends GetView<ProductController> {
                             var data = cartController.mapToData(currentIndex);
                             data.proQty = currentIndex['qty'] + 1;
                             data.productId = int.parse(currentIndex['id']);
-                            cartController.addToCart(context, data, subCatId);
+                            cartController.addToCart(context, data, subCatId,false);
                           }
                           controller.update();
                         },
@@ -118,7 +118,7 @@ class ProductCard extends GetView<ProductController> {
                               var data = cartController.mapToData(currentIndex);
                               data.proQty = currentIndex['qty'] - 1;
                               data.productId = int.parse(currentIndex['id']);
-                              cartController.addToCart(context, data, subCatId);
+                              cartController.addToCart(context, data, subCatId,false);
                               controller.update();
                             } else {
                               // await controller.deleteCart(

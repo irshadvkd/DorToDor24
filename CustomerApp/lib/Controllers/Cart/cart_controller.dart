@@ -36,7 +36,7 @@ class CartController extends GetxController {
       try {
         cartModal.value =
             CartModal.fromJson(jsonDecode(cartJson)); // Decode JSON
-        addCartToList(); // Update cart items
+        addCartToList(true); // Update cart items
       } catch (e) {
         print(
             "Error parsing cart JSON: $e"); // Catch and log any parsing errors
@@ -61,7 +61,7 @@ class CartController extends GetxController {
   }
 
   // Add an item to the cart
-  void addToCart(context, Data newItem, subCatId, {bool fromCart = false}) {
+  void addToCart(context, Data newItem, subCatId, fromCart) {
     isFromCart.value = fromCart; // Set the flag
     isLoading.value = true; // Start loading state
     update();
@@ -99,7 +99,7 @@ class CartController extends GetxController {
     }
 
     saveCartToSession(); // Save the updated cart to session
-    addCartToList(); // Update the UI
+    addCartToList(fromCart); // Update the UI
 
     if (!isFromCart.value) {
       final productController = Get.put(ProductController());
@@ -120,7 +120,7 @@ class CartController extends GetxController {
     if (cartModal.value.data != null) {
       cartModal.value.data!.removeWhere((item) => item.id == cartId);
       saveCartToSession(); // Save the updated cart to session
-      addCartToList(); // Update the UI
+      addCartToList(fromCart); // Update the UI
     }
 
     if (!isFromCart.value) {
@@ -134,7 +134,8 @@ class CartController extends GetxController {
   }
 
   // Update cart items and calculate total
-  void addCartToList() {
+  void addCartToList(bool fromCart) {
+    isFromCart.value= fromCart;
     cartItems.clear(); // Clear previous items
     cartTotal.value = 0; // Reset total
     if (cartModal.value.data != null) {
@@ -149,10 +150,12 @@ class CartController extends GetxController {
       }
     }
     update();
-    final productController = Get.put(ProductController());
-    productController.addProductToList();
-    productController.update();
-    update(); // Notify UI of changes
+    if (!isFromCart.value) {
+      final productController = Get.put(ProductController());
+      productController.addProductToList();
+      productController.update();
+      update(); // Notify UI of changes
+    }
   }
 
   void clearCart() {
