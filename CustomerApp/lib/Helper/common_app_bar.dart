@@ -19,6 +19,7 @@ class CommonAppBar extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    var cartController = Get.put(CartController());
     return GetBuilder<HomeController>(
       builder: (controller) {
         return Scaffold(
@@ -54,7 +55,6 @@ class CommonAppBar extends StatelessWidget {
                           ),
                           iconSize: 26,
                           onPressed: () {
-                            var cartController = Get.put(CartController());
                             cartController.loadCartFromSession();
                             Get.to(() => const CartPage(hideAppBar: false));
                             // Get.offAllNamed("/home");
@@ -62,6 +62,26 @@ class CommonAppBar extends StatelessWidget {
                             controller.update();
                           },
                         ),
+                        if (cartController.cartItems.isNotEmpty)
+                          Positioned(
+                            top: 0,
+                            right: 10,
+                            child: Container(
+                              padding: const EdgeInsets.all(5),
+                              alignment: Alignment.center,
+                              decoration: const BoxDecoration(
+                                color: colors.secondary,
+                                shape: BoxShape.circle,
+                              ),
+                              child: Text(
+                                "${cartController.cartItems.length}",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headlineSmall!
+                                    .copyWith(color: colors.white),
+                              ),
+                            ),
+                          ),
                       ],
                     ),
                   ]

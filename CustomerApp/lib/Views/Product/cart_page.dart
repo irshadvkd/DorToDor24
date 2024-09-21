@@ -1,5 +1,4 @@
 import 'package:dorTodor24/Controllers/Cart/cart_controller.dart';
-import 'package:dorTodor24/Controllers/Product/product_controller.dart';
 import 'package:dorTodor24/Helper/colors.dart';
 import 'package:dorTodor24/Helper/common_alert.dart';
 import 'package:dorTodor24/Helper/common_app_bar.dart';
@@ -123,7 +122,7 @@ class CartPage extends GetView<CartController> {
               //   true,
               //   0,
               // );
-              controller.removeFromCart(context, currentIndex.id!, 0);
+              controller.removeFromCart(context, currentIndex.id!, 0, true);
             },
             backgroundColor: Colors.transparent,
             foregroundColor: Colors.red,
@@ -146,7 +145,7 @@ class CartPage extends GetView<CartController> {
               child: AspectRatio(
                 aspectRatio: 4 / 3,
                 child: CommonImage(
-                  url: currentIndex.image??"",
+                  url: currentIndex.image ?? "",
                   fit: BoxFit.contain,
                 ),
               ),
@@ -164,8 +163,8 @@ class CartPage extends GetView<CartController> {
                             Expanded(
                               child: Text(
                                 Get.locale!.languageCode == "en"
-                                    ? currentIndex.nameEng??""
-                                    : currentIndex.nameAr??"",
+                                    ? currentIndex.nameEng ?? ""
+                                    : currentIndex.nameAr ?? "",
                                 style: Theme.of(context)
                                     .textTheme
                                     .headlineLarge!

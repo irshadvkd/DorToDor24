@@ -112,7 +112,7 @@ class CartController extends GetxController {
   }
 
   // Remove an item from the cart
-  void removeFromCart(context, int cartId, subCatId, {bool fromCart = false}) {
+  void removeFromCart(context, int cartId, subCatId, fromCart) {
     isFromCart.value = fromCart; // Set the flag
     isLoading.value = true; // Start loading state
     update();

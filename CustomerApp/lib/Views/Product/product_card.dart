@@ -128,7 +128,11 @@ class ProductCard extends GetView<ProductController> {
                               //   subCatId,
                               // );
                               final cartController = Get.put(CartController());
-                              cartController.removeFromCart(context, int.parse(currentIndex['cartId']),subCatId);
+                              cartController.removeFromCart(
+                                  context,
+                                  int.parse(currentIndex['cartId']),
+                                  subCatId,
+                                  false);
                             }
                           },
                           padding: const EdgeInsets.all(3),

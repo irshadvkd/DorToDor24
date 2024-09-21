@@ -26,7 +26,6 @@ class _HomeAppBarState extends State<HomeAppBar> {
     super.initState();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
@@ -84,42 +83,70 @@ class _HomeAppBarState extends State<HomeAppBar> {
 
   Widget bottomNavigationBar(context) {
     final controller = Get.put(HomeController());
-    return BottomNavigationBar(
-      currentIndex: controller.currentPage,
-      onTap: (index) {
-        controller.currentPage = index;
-        if (index == 1) {
-          var cartController = Get.put(CartController());
-          cartController.loadCartFromSession();
-        }
-        controller.update();
+    // var cartController = Get.put(CartController());
+    return GetBuilder<CartController>(
+      builder: (cartController) {
+        return BottomNavigationBar(
+          currentIndex: controller.currentPage,
+          onTap: (index) {
+            controller.currentPage = index;
+            if (index == 1) {
+              cartController.loadCartFromSession();
+            }
+            controller.update();
+          },
+          elevation: 0,
+          backgroundColor: colors.white,
+          selectedItemColor: colors.primary,
+          unselectedItemColor: colors.secondary,
+          selectedLabelStyle: const TextStyle(
+            fontSize: 13,
+            fontWeight: FontWeight.w500,
+          ),
+          unselectedLabelStyle: const TextStyle(
+            fontSize: 13,
+            fontWeight: FontWeight.w500,
+          ),
+          items: [
+            const BottomNavigationBarItem(
+              icon: Icon(Icons.home_outlined),
+              label: "Home",
+            ),
+            BottomNavigationBarItem(
+              icon: Stack(
+                children: [
+                  const Icon(Icons.shopping_cart_outlined),
+                  if (cartController.cartItems.isNotEmpty)
+                    Positioned(
+                      top: -5,
+                      right: 0,
+                      child: Container(
+                        padding: const EdgeInsets.all(5),
+                        alignment: Alignment.center,
+                        decoration: const BoxDecoration(
+                          color: colors.secondary,
+                          shape: BoxShape.circle,
+                        ),
+                        child: Text(
+                          "${cartController.cartItems.length}",
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineSmall!
+                              .copyWith(color: colors.white),
+                        ),
+                      ),
+                    ),
+                ],
+              ),
+              label: "Cart",
+            ),
+            const BottomNavigationBarItem(
+              icon: Icon(Icons.menu_rounded),
+              label: "Menu",
+            ),
+          ],
+        );
       },
-      elevation: 0,
-      backgroundColor: colors.white,
-      selectedItemColor: colors.primary,
-      unselectedItemColor: colors.secondary,
-      selectedLabelStyle: const TextStyle(
-        fontSize: 13,
-        fontWeight: FontWeight.w500,
-      ),
-      unselectedLabelStyle: const TextStyle(
-        fontSize: 13,
-        fontWeight: FontWeight.w500,
-      ),
-      items: const [
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home_outlined),
-          label: "Home",
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.shopping_cart_outlined),
-          label: "Cart",
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.menu_rounded),
-          label: "Menu",
-        ),
-      ],
     );
   }
 }
