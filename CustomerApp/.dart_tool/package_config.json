@@ -200,6 +200,12 @@
       "languageVersion": "3.2"
     },
     {
+      "name": "flutter_slidable",
+      "rootUri": "file:///Users/mohammedvc/.pub-cache/hosted/pub.dev/flutter_slidable-3.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "flutter_svg",
       "rootUri": "file:///Users/mohammedvc/.pub-cache/hosted/pub.dev/flutter_svg-2.0.10+1",
       "packageUri": "lib/",
@@ -222,6 +228,12 @@
       "rootUri": "file:///Users/mohammedvc/.pub-cache/hosted/pub.dev/get-4.6.6",
       "packageUri": "lib/",
       "languageVersion": "2.15"
+    },
+    {
+      "name": "get_storage",
+      "rootUri": "file:///Users/mohammedvc/.pub-cache/hosted/pub.dev/get_storage-2.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.16"
     },
     {
       "name": "http",
@@ -543,7 +555,7 @@
     },
     {
       "name": "uuid",
-      "rootUri": "file:///Users/mohammedvc/.pub-cache/hosted/pub.dev/uuid-4.4.2",
+      "rootUri": "file:///Users/mohammedvc/.pub-cache/hosted/pub.dev/uuid-4.5.0",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
@@ -614,7 +626,7 @@
       "languageVersion": "3.5"
     }
   ],
-  "generated": "2024-08-30T12:05:44.560771Z",
+  "generated": "2024-09-21T00:06:58.556374Z",
   "generator": "pub",
   "generatorVersion": "3.5.1",
   "flutterRoot": "file:///Applications/flutter",

@@ -5,6 +5,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dorTodor24/Helper/colors.dart';
 import 'package:dorTodor24/Helper/language.dart';
@@ -36,6 +37,7 @@ FirebaseMessaging messaging = FirebaseMessaging.instance;
 void main(context) async {
   WidgetsFlutterBinding.ensureInitialized();
   HttpOverrides.global = MyHttpOverrides();
+  await GetStorage.init();
   // await Firebase.initializeApp();
 
   // FirebaseMessaging.instance.getInitialMessage();
