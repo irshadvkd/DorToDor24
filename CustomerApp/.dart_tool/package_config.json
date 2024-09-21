@@ -230,6 +230,12 @@
       "languageVersion": "2.15"
     },
     {
+      "name": "get_storage",
+      "rootUri": "file:///Users/mohammedvc/.pub-cache/hosted/pub.dev/get_storage-2.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.16"
+    },
+    {
       "name": "http",
       "rootUri": "file:///Users/mohammedvc/.pub-cache/hosted/pub.dev/http-1.2.2",
       "packageUri": "lib/",
@@ -549,7 +555,7 @@
     },
     {
       "name": "uuid",
-      "rootUri": "file:///Users/mohammedvc/.pub-cache/hosted/pub.dev/uuid-4.4.2",
+      "rootUri": "file:///Users/mohammedvc/.pub-cache/hosted/pub.dev/uuid-4.5.0",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
@@ -620,7 +626,7 @@
       "languageVersion": "3.5"
     }
   ],
-  "generated": "2024-09-15T13:21:57.652528Z",
+  "generated": "2024-09-21T00:06:58.556374Z",
   "generator": "pub",
   "generatorVersion": "3.5.1",
   "flutterRoot": "file:///Applications/flutter",

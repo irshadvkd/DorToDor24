@@ -1,3 +1,4 @@
+import 'package:dorTodor24/Controllers/Cart/cart_controller.dart';
 import 'package:dorTodor24/Controllers/Product/product_controller.dart';
 import 'package:dorTodor24/Helper/colors.dart';
 import 'package:dorTodor24/Helper/common_card.dart';
@@ -27,7 +28,7 @@ class ProductCard extends GetView<ProductController> {
             children: [
               GestureDetector(
                 onTap: () {
-                  Get.to(() => ProductDetailPage(currentIndex: currentIndex));
+                  // Get.to(() => ProductDetailPage(currentIndex: currentIndex));
                 },
                 child: AspectRatio(
                   aspectRatio: 5 / 3,
@@ -49,21 +50,32 @@ class ProductCard extends GetView<ProductController> {
                         color: colors.themeButton,
                         onTap: () async {
                           if (currentIndex['qty'] == 0) {
-                            await controller.addToCart(
-                              context,
-                              currentIndex['id'],
-                              currentIndex['qty'] + 1,
-                              subCatId,
-                            );
+                            // await controller.addToCart(
+                            //   context,
+                            //   currentIndex['id'],
+                            //   currentIndex['qty'] + 1,
+                            //   subCatId,
+                            // );
+                            final cartController = Get.put(CartController());
+                            int cartId = cartController.generateCartId();
+                            var data = cartController.mapToData(currentIndex);
+                            data.proQty = currentIndex['qty'] + 1;
+                            data.id = cartId;
+                            data.productId = int.parse(currentIndex['id']);
+                            cartController.addToCart(context, data, subCatId);
                           } else {
-                            await controller.updateCart(
-                              context,
-                              currentIndex['cartId'],
-                              currentIndex['qty'] + 1,
-                              false,
-                              subCatId,
-                            );
-                            // currentIndex['qty'] = currentIndex['qty'] + 1;
+                            // await controller.updateCart(
+                            //   context,
+                            //   currentIndex['cartId'],
+                            //   currentIndex['qty'] + 1,
+                            //   false,
+                            //   subCatId,
+                            // );
+                            final cartController = Get.put(CartController());
+                            var data = cartController.mapToData(currentIndex);
+                            data.proQty = currentIndex['qty'] + 1;
+                            data.productId = int.parse(currentIndex['id']);
+                            cartController.addToCart(context, data, subCatId);
                           }
                           controller.update();
                         },
@@ -95,23 +107,28 @@ class ProductCard extends GetView<ProductController> {
                           color: colors.themeButton,
                           onTap: () async {
                             if (currentIndex['qty'] > 1) {
-                              await controller.updateCart(
-                                context,
-                                currentIndex['cartId'],
-                                currentIndex['qty'] - 1,
-                                false,
-                                subCatId,
-                              );
-                              // currentIndex['qty'] = currentIndex['qty'] - 1;
+                              // await controller.updateCart(
+                              //   context,
+                              //   currentIndex['cartId'],
+                              //   currentIndex['qty'] - 1,
+                              //   false,
+                              //   subCatId,
+                              // );
+                              final cartController = Get.put(CartController());
+                              var data = cartController.mapToData(currentIndex);
+                              data.proQty = currentIndex['qty'] - 1;
+                              data.productId = int.parse(currentIndex['id']);
+                              cartController.addToCart(context, data, subCatId);
                               controller.update();
                             } else {
-                              await controller.deleteCart(
-                                context,
-                                currentIndex['cartId'],
-                                false,
-                                subCatId,
-                              );
-                              // currentIndex['qty'] = currentIndex['qty'] - 1;
+                              // await controller.deleteCart(
+                              //   context,
+                              //   currentIndex['cartId'],
+                              //   false,
+                              //   subCatId,
+                              // );
+                              final cartController = Get.put(CartController());
+                              cartController.removeFromCart(context, int.parse(currentIndex['cartId']),subCatId);
                             }
                           },
                           padding: const EdgeInsets.all(3),

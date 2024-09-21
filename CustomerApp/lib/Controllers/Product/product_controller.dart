@@ -1,14 +1,15 @@
 import 'dart:convert';
 
+import 'package:dorTodor24/Controllers/Cart/cart_controller.dart';
 import 'package:dorTodor24/Controllers/Home/home_controller.dart';
 import 'package:dorTodor24/Helper/common_alert.dart';
 import 'package:dorTodor24/Helper/session.dart';
 import 'package:dorTodor24/Helper/string.dart';
 import 'package:dorTodor24/Modals/Product/cart_modal.dart';
+import 'package:dorTodor24/Modals/Product/cart_modal.dart' as cart;
 import 'package:dorTodor24/Modals/Product/order_modal.dart';
 import 'package:dorTodor24/Modals/Product/product_modal.dart';
 import 'package:dorTodor24/Modals/Product/sub_category_modal.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -108,24 +109,31 @@ class ProductController extends GetxController {
     update();
   }
 
+  final cartController = Get.put(CartController());
   addProductToList() {
-    cartItems.clear();
-    for (var i = 0; i < productModal!.cart!.length; i++) {
-      var currentIndex = productModal!.cart![i];
-      cartItems.add({
-        "id": currentIndex.id.toString(),
-        "productId": currentIndex.productId,
-        "proQty": currentIndex.proQty,
-        "nameEng": currentIndex.nameEng,
-        "nameAr": currentIndex.nameAr,
-        "image": "$imgUrl${currentIndex.image}",
-        "price": currentIndex.price,
-        "unitEng": currentIndex.unitEng,
-        "unitAr": currentIndex.unitAr,
-      });
+    final cartController = Get.put(CartController());
+    cartController.cartItems.clear();
+    cartController.update();
+
+    // Populate cartItems from productModal.cart
+    for (var currentIndex in cartController.cartModal.value.data ?? []) {
+      // Create Data instance from the current cart item
+      cart.Data dataItem = cart.Data(
+        id: currentIndex.id,
+        productId: currentIndex.productId,
+        proQty: currentIndex.proQty,
+        nameEng: currentIndex.nameEng ?? "",
+        nameAr: currentIndex.nameAr ?? "",
+        image: "$imgUrl${currentIndex.image}",
+        price: currentIndex.price ?? "",
+        unitEng: currentIndex.unitEng ?? "",
+        unitAr: currentIndex.unitAr ?? "",
+      );
+
+      // Add the Data instance to cartItems
+      cartController.cartItems.add(dataItem);
+      cartController.update();
     }
-    print(productModal!.cart);
-    print(cartItems);
     product.clear();
     for (var i = 0; i < productModal!.data!.length; i++) {
       var currentIndex = productModal!.data![i];
@@ -139,13 +147,14 @@ class ProductController extends GetxController {
               .contains(searchInProduct.text.toLowerCase())) {
         var cartId = "0";
         int qty = 0;
-        for (var item in cartItems) {
-          if (item['productId'].toString() == currentIndex.id.toString()) {
-            cartId = item['id'];
-            qty = item['proQty'];
+        for (cart.Data item in cartController.cartItems) {
+          if (item.productId.toString() == currentIndex.id.toString()) {
+            cartId = item.id.toString();
+            qty = item.proQty!;
             break;
           }
         }
+        // print(cartId);
         product.add({
           "id": currentIndex.id.toString(),
           "nameEng": currentIndex.nameEng ?? "",
