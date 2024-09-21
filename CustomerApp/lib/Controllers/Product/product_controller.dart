@@ -5,16 +5,11 @@ import 'package:dorTodor24/Controllers/Home/home_controller.dart';
 import 'package:dorTodor24/Helper/common_alert.dart';
 import 'package:dorTodor24/Helper/session.dart';
 import 'package:dorTodor24/Helper/string.dart';
-import 'package:dorTodor24/Modals/Product/cart_modal.dart';
 import 'package:dorTodor24/Modals/Product/cart_modal.dart' as cart;
-import 'package:dorTodor24/Modals/Product/order_modal.dart';
 import 'package:dorTodor24/Modals/Product/product_modal.dart';
 import 'package:dorTodor24/Modals/Product/sub_category_modal.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../Helper/colors.dart';
-import '../../Views/Billing/order_success_widget.dart';
 
 class ProductController extends GetxController {
   TextEditingController searchInSubCategory = TextEditingController();
@@ -30,7 +25,8 @@ class ProductController extends GetxController {
   bool subCategoryLoader = true;
   bool productLoader = true;
   bool orderLoader = true;
-  bool isCashOnDelivery = true;
+  // bool isCashOnDelivery = true;
+  String paymentMethod = "";
 
   List subCategory = [];
   List product = [];
@@ -124,7 +120,7 @@ class ProductController extends GetxController {
         proQty: currentIndex.proQty,
         nameEng: currentIndex.nameEng ?? "",
         nameAr: currentIndex.nameAr ?? "",
-        image: "$imgUrl${currentIndex.image}",
+        image: currentIndex.image ?? "",
         price: currentIndex.price ?? "",
         unitEng: currentIndex.unitEng ?? "",
         unitAr: currentIndex.unitAr ?? "",
@@ -171,126 +167,126 @@ class ProductController extends GetxController {
     update();
   }
 
-  CartModal? cartModal;
-
-  Future getCart(context) async {
-    isNetworkAvail = await isNetworkAvailable();
-    // if (isNetworkAvail) {
-    buttonLoader = false;
-    update();
-    var userId = "1";
-    var response = await getAPI(context, "product/getCart?userId=$userId");
-    if (response['status'] == true) {
-      cartModal = CartModal.fromJson(response['body']);
-      addCartToList();
-    }
-    buttonLoader = true;
-    // }
-    update();
-  }
-
-  Future addToCart(context, productId, qty, subCatId) async {
-    isNetworkAvail = await isNetworkAvailable();
-    // if (isNetworkAvail) {
-    buttonLoader = false;
-    update();
-    var userId = "1";
-    var data = {
-      "userId": userId,
-      "productId": productId,
-      "qty": qty,
-      "subCatId": subCatId,
-    };
-    var response = await postAPI(
-      context,
-      "product/addCart",
-      jsonEncode(data),
-    );
-    if (response['status'] == true) {
-      productModal = ProductModal.fromJson(response['body']);
-      addProductToList();
-    }
-    buttonLoader = true;
-    // }
-    update();
-  }
-
-  Future updateCart(context, cartId, qty, isFromCart, subCatId) async {
-    isNetworkAvail = await isNetworkAvailable();
-    // if (isNetworkAvail) {
-    buttonLoader = false;
-    update();
-    var userId = "1";
-    var data = {
-      "userId": userId,
-      "cartId": cartId,
-      "qty": qty,
-    };
-    var response = await postAPI(
-      context,
-      "product/updateCart",
-      jsonEncode(data),
-    );
-    if (response['status'] == true) {
-      cartModal = CartModal.fromJson(response['body']);
-      await addCartToList();
-      if (isFromCart == false) {
-        getProduct(context, subCatId);
-      }
-      // }
-      buttonLoader = true;
-    }
-    update();
-  }
-
-  Future deleteCart(context, cartId, isFromCart, subCatId) async {
-    isNetworkAvail = await isNetworkAvailable();
-    // if (isNetworkAvail) {
-    buttonLoader = false;
-    update();
-    var userId = "1";
-    var data = {
-      "userId": userId,
-      "cartId": cartId,
-    };
-    var response = await postAPI(
-      context,
-      "product/deleteCart",
-      jsonEncode(data),
-    );
-    if (response['status'] == true) {
-      cartModal = CartModal.fromJson(response['body']);
-      await addCartToList();
-      if (isFromCart == false) {
-        getProduct(context, subCatId);
-      }
-    }
-    buttonLoader = true;
-    // }
-    update();
-  }
-
-  addCartToList() {
-    cartItems.clear();
-    cartTotal = 0;
-    for (var i = 0; i < cartModal!.data!.length; i++) {
-      var currentIndex = cartModal!.data![i];
-      cartItems.add({
-        "id": currentIndex.id.toString(),
-        "productId": currentIndex.productId,
-        "proQty": currentIndex.proQty,
-        "nameEng": currentIndex.nameEng,
-        "nameAr": currentIndex.nameAr,
-        "image": "$imgUrl${currentIndex.image}",
-        "price": currentIndex.price,
-        "unitEng": currentIndex.unitEng,
-        "unitAr": currentIndex.unitAr,
-      });
-      cartTotal = cartTotal +
-          (currentIndex.proQty! * double.parse(currentIndex.price!));
-    }
-    update();
-  }
+  // CartModal? cartModal;
+  //
+  // Future getCart(context) async {
+  //   isNetworkAvail = await isNetworkAvailable();
+  //   // if (isNetworkAvail) {
+  //   buttonLoader = false;
+  //   update();
+  //   var userId = "1";
+  //   var response = await getAPI(context, "product/getCart?userId=$userId");
+  //   if (response['status'] == true) {
+  //     cartModal = CartModal.fromJson(response['body']);
+  //     addCartToList();
+  //   }
+  //   buttonLoader = true;
+  //   // }
+  //   update();
+  // }
+  //
+  // Future addToCart(context, productId, qty, subCatId) async {
+  //   isNetworkAvail = await isNetworkAvailable();
+  //   // if (isNetworkAvail) {
+  //   buttonLoader = false;
+  //   update();
+  //   var userId = "1";
+  //   var data = {
+  //     "userId": userId,
+  //     "productId": productId,
+  //     "qty": qty,
+  //     "subCatId": subCatId,
+  //   };
+  //   var response = await postAPI(
+  //     context,
+  //     "product/addCart",
+  //     jsonEncode(data),
+  //   );
+  //   if (response['status'] == true) {
+  //     productModal = ProductModal.fromJson(response['body']);
+  //     addProductToList();
+  //   }
+  //   buttonLoader = true;
+  //   // }
+  //   update();
+  // }
+  //
+  // Future updateCart(context, cartId, qty, isFromCart, subCatId) async {
+  //   isNetworkAvail = await isNetworkAvailable();
+  //   // if (isNetworkAvail) {
+  //   buttonLoader = false;
+  //   update();
+  //   var userId = "1";
+  //   var data = {
+  //     "userId": userId,
+  //     "cartId": cartId,
+  //     "qty": qty,
+  //   };
+  //   var response = await postAPI(
+  //     context,
+  //     "product/updateCart",
+  //     jsonEncode(data),
+  //   );
+  //   if (response['status'] == true) {
+  //     cartModal = CartModal.fromJson(response['body']);
+  //     await addCartToList();
+  //     if (isFromCart == false) {
+  //       getProduct(context, subCatId);
+  //     }
+  //     // }
+  //     buttonLoader = true;
+  //   }
+  //   update();
+  // }
+  //
+  // Future deleteCart(context, cartId, isFromCart, subCatId) async {
+  //   isNetworkAvail = await isNetworkAvailable();
+  //   // if (isNetworkAvail) {
+  //   buttonLoader = false;
+  //   update();
+  //   var userId = "1";
+  //   var data = {
+  //     "userId": userId,
+  //     "cartId": cartId,
+  //   };
+  //   var response = await postAPI(
+  //     context,
+  //     "product/deleteCart",
+  //     jsonEncode(data),
+  //   );
+  //   if (response['status'] == true) {
+  //     cartModal = CartModal.fromJson(response['body']);
+  //     await addCartToList();
+  //     if (isFromCart == false) {
+  //       getProduct(context, subCatId);
+  //     }
+  //   }
+  //   buttonLoader = true;
+  //   // }
+  //   update();
+  // }
+  //
+  // addCartToList() {
+  //   cartItems.clear();
+  //   cartTotal = 0;
+  //   for (var i = 0; i < cartModal!.data!.length; i++) {
+  //     var currentIndex = cartModal!.data![i];
+  //     cartItems.add({
+  //       "id": currentIndex.id.toString(),
+  //       "productId": currentIndex.productId,
+  //       "proQty": currentIndex.proQty,
+  //       "nameEng": currentIndex.nameEng,
+  //       "nameAr": currentIndex.nameAr,
+  //       "image": "$imgUrl${currentIndex.image}",
+  //       "price": currentIndex.price,
+  //       "unitEng": currentIndex.unitEng,
+  //       "unitAr": currentIndex.unitAr,
+  //     });
+  //     cartTotal = cartTotal +
+  //         (currentIndex.proQty! * double.parse(currentIndex.price!));
+  //   }
+  //   update();
+  // }
 
   Future confirmOrder(
     context,

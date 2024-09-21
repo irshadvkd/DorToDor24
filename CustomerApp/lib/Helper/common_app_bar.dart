@@ -1,3 +1,4 @@
+import 'package:dorTodor24/Controllers/Cart/cart_controller.dart';
 import 'package:dorTodor24/Controllers/Product/product_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,6 +19,7 @@ class CommonAppBar extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    var cartController = Get.put(CartController());
     return GetBuilder<HomeController>(
       builder: (controller) {
         return Scaffold(
@@ -53,17 +55,33 @@ class CommonAppBar extends StatelessWidget {
                           ),
                           iconSize: 26,
                           onPressed: () {
-                            // controller.getNotification(context);
-                            // Get.offAndToNamed("/home");
-                            var productController =
-                                Get.put(ProductController());
-                            productController.getCart(context);
-                            // Get.to(() => const CartPage());
-                            Get.offAllNamed("/home");
-                            controller.currentPage = 1;
+                            cartController.loadCartFromSession();
+                            Get.to(() => const CartPage(hideAppBar: false));
+                            // Get.offAllNamed("/home");
+                            // controller.currentPage = 1;
                             controller.update();
                           },
                         ),
+                        if (cartController.cartItems.isNotEmpty)
+                          Positioned(
+                            top: 0,
+                            right: 10,
+                            child: Container(
+                              padding: const EdgeInsets.all(5),
+                              alignment: Alignment.center,
+                              decoration: const BoxDecoration(
+                                color: colors.secondary,
+                                shape: BoxShape.circle,
+                              ),
+                              child: Text(
+                                "${cartController.cartItems.length}",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headlineSmall!
+                                    .copyWith(color: colors.white),
+                              ),
+                            ),
+                          ),
                       ],
                     ),
                   ]

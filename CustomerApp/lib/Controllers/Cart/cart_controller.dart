@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:dorTodor24/Controllers/Product/product_controller.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart' as storage;
-import 'package:uuid/uuid.dart';
 
 import '../../Modals/Product/cart_modal.dart';
 
@@ -73,16 +72,11 @@ class CartController extends GetxController {
       // Check if the item already exists in the cart
       int index = cartModal.value.data!
           .indexWhere((item) => item.productId == newItem.productId);
-      print("dfc ${newItem.productId}");
       if (index >= 0) {
         // Update the quantity if the item already exists
         cartModal.value.data![index].proQty = newItem.proQty!;
         final productController = Get.put(ProductController());
-        print(productController.product.length);
         for (var i = 0; i < productController.product.length; i++) {
-          // print("sdghcds");
-          // print(productController.product[i]['id']);
-          // print( newItem.productId.toString());
           if (productController.product[i]['id'] ==
               newItem.productId.toString()) {
             productController.product[i]['qty'] = newItem.proQty.toString();
@@ -92,6 +86,14 @@ class CartController extends GetxController {
       } else {
         // Add the new item to the cart
         cartModal.value.data!.add(newItem);
+        final productController = Get.put(ProductController());
+        for (var i = 0; i < productController.product.length; i++) {
+          if (productController.product[i]['id'] ==
+              newItem.productId.toString()) {
+            productController.product[i]['qty'] = newItem.proQty.toString();
+          }
+        }
+        productController.update();
         print(cartModal.value.data![0].proQty);
       }
     }
@@ -110,7 +112,7 @@ class CartController extends GetxController {
   }
 
   // Remove an item from the cart
-  void removeFromCart(context, int cartId, subCatId, {bool fromCart = false}) {
+  void removeFromCart(context, int cartId, subCatId, fromCart) {
     isFromCart.value = fromCart; // Set the flag
     isLoading.value = true; // Start loading state
     update();
