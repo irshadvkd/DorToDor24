@@ -28,7 +28,7 @@ class ProductCard extends GetView<ProductController> {
             children: [
               GestureDetector(
                 onTap: () {
-                  // Get.to(() => ProductDetailPage(currentIndex: currentIndex));
+                  Get.to(() => ProductDetailPage(currentIndex: currentIndex));
                 },
                 child: AspectRatio(
                   aspectRatio: 5 / 3,
@@ -62,7 +62,8 @@ class ProductCard extends GetView<ProductController> {
                             data.proQty = currentIndex['qty'] + 1;
                             data.id = cartId;
                             data.productId = int.parse(currentIndex['id']);
-                            cartController.addToCart(context, data, subCatId,false);
+                            cartController.addToCart(
+                                context, data, subCatId, false);
                           } else {
                             // await controller.updateCart(
                             //   context,
@@ -75,7 +76,8 @@ class ProductCard extends GetView<ProductController> {
                             var data = cartController.mapToData(currentIndex);
                             data.proQty = currentIndex['qty'] + 1;
                             data.productId = int.parse(currentIndex['id']);
-                            cartController.addToCart(context, data, subCatId,false);
+                            cartController.addToCart(
+                                context, data, subCatId, false);
                           }
                           controller.update();
                         },
@@ -118,7 +120,8 @@ class ProductCard extends GetView<ProductController> {
                               var data = cartController.mapToData(currentIndex);
                               data.proQty = currentIndex['qty'] - 1;
                               data.productId = int.parse(currentIndex['id']);
-                              cartController.addToCart(context, data, subCatId,false);
+                              cartController.addToCart(
+                                  context, data, subCatId, false);
                               controller.update();
                             } else {
                               // await controller.deleteCart(
@@ -161,7 +164,7 @@ class ProductCard extends GetView<ProductController> {
                             : currentIndex['nameAr'],
                         style: Theme.of(context)
                             .textTheme
-                            .titleLarge!
+                            .headlineLarge!
                             .copyWith(color: colors.textMain),
                         textAlign: TextAlign.center,
                         maxLines: 1,
@@ -172,8 +175,8 @@ class ProductCard extends GetView<ProductController> {
                         "${currentIndex['price']} $currencyCode",
                         style: Theme.of(context)
                             .textTheme
-                            .titleLarge!
-                            .copyWith(fontSize: 16, color: colors.green),
+                            .headlineLarge!
+                            .copyWith(color: colors.green),
                       ),
                     ],
                   ),
