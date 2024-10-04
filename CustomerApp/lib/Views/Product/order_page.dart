@@ -5,20 +5,32 @@ import 'package:dorTodor24/Helper/common_app_bar.dart';
 import 'package:dorTodor24/Helper/common_button.dart';
 import 'package:dorTodor24/Helper/common_drop_down.dart';
 import 'package:dorTodor24/Helper/common_text_field.dart';
-import 'package:dorTodor24/Views/Billing/order_confirm_page.dart';
 import 'package:dorTodor24/Views/Product/order_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-class OrderPage extends GetView<ProductController> {
-  OrderPage({super.key});
+class OrderPage extends StatefulWidget {
+  const OrderPage({super.key});
+
+  @override
+  State<OrderPage> createState() => _OrderPageState();
+}
+
+class _OrderPageState extends State<OrderPage> {
   final _formKey = GlobalKey<FormState>();
+  @override
+  void initState() {
+    final productController = Get.put(ProductController());
+    productController.paymentMethod = "1";
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final homeController = Get.put(HomeController());
     return CommonAppBar(
-      title: "Order Page",
+      title: "Delivery Information",
       actionEnable: false,
       child: GetBuilder<ProductController>(
         builder: (controller) {
@@ -28,11 +40,8 @@ class OrderPage extends GetView<ProductController> {
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'Delivery Information',
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0, 16, 0, 16),
                       child: CommonDropDown(
@@ -64,23 +73,23 @@ class OrderPage extends GetView<ProductController> {
                       ),
                     ),
                     CommonTextField(
-                      hintText: 'Building Number',
-                      textController: controller.buildingNo,
+                      hintText: 'Street',
+                      textController: controller.address,
+                      maxLines: 1,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Please enter your building number';
+                          return 'Please enter your Street';
                         }
                         return null;
                       },
                     ),
                     const SizedBox(height: 16),
                     CommonTextField(
-                      hintText: 'Address',
-                      textController: controller.address,
-                      maxLines: 3,
+                      hintText: 'Building Number',
+                      textController: controller.buildingNo,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Please enter your address';
+                          return 'Please enter your building number';
                         }
                         return null;
                       },
@@ -104,12 +113,12 @@ class OrderPage extends GetView<ProductController> {
                     CommonTextField(
                       hintText: 'Delivery Note (Optional)',
                       textController: controller.deliveryNote,
-                      maxLines: 4,
+                      maxLines: 3,
                     ),
                     const SizedBox(height: 16),
                     Container(
                       decoration: BoxDecoration(
-                        color: controller.isCashOnDelivery
+                        color: controller.paymentMethod == "1"
                             ? colors.primary
                             : Colors.grey[200],
                         border: Border.all(color: colors.borderColor),
@@ -119,19 +128,81 @@ class OrderPage extends GetView<ProductController> {
                         controlAffinity: ListTileControlAffinity.leading,
                         activeColor: colors.white,
                         checkColor: colors.secondary,
-                        value: controller.isCashOnDelivery,
+                        value: controller.paymentMethod == "1",
                         title: Text(
                           'Cash on Delivery',
                           style: Theme.of(context)
                               .textTheme
                               .titleSmall!
                               .copyWith(
-                                  color: controller.isCashOnDelivery
+                                  color: controller.paymentMethod == "1"
                                       ? colors.white
                                       : colors.textMain),
                         ),
                         onChanged: (newValue) {
-                          controller.isCashOnDelivery = true;
+                          controller.paymentMethod = "1";
+                          controller.update();
+                        },
+                      ),
+                    ),
+                    const SizedBox(height: 5),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: controller.paymentMethod == "2"
+                            ? colors.primary
+                            : Colors.grey[200],
+                        border: Border.all(color: colors.borderColor),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      child: CheckboxListTile(
+                        controlAffinity: ListTileControlAffinity.leading,
+                        activeColor: colors.white,
+                        checkColor: colors.secondary,
+                        value: controller.paymentMethod == "2",
+                        title: Text(
+                          'KNET',
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleSmall!
+                              .copyWith(
+                                  color: controller.paymentMethod == "2"
+                                      ? colors.white
+                                      : colors.textMain),
+                        ),
+                        onChanged: (newValue) {
+                          controller.paymentMethod = "2";
+                          controller.update();
+                        },
+                      ),
+                    ),
+                    const SizedBox(height: 5),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: controller.paymentMethod == "3"
+                            ? colors.primary
+                            : Colors.grey[200],
+                        border: Border.all(color: colors.borderColor),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      child: CheckboxListTile(
+                        controlAffinity: ListTileControlAffinity.leading,
+                        activeColor: colors.white,
+                        checkColor: colors.secondary,
+                        value: controller.paymentMethod == "3",
+                        title: Text(
+                          'Link',
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleSmall!
+                              .copyWith(
+                                  color: controller.paymentMethod == "3"
+                                      ? colors.white
+                                      : colors.textMain),
+                        ),
+                        onChanged: (newValue) {
+                          print(newValue);
+                          controller.paymentMethod = "3";
+                          print(controller.paymentMethod);
                           controller.update();
                         },
                       ),

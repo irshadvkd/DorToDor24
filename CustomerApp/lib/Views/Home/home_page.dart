@@ -1,11 +1,10 @@
+import 'package:dorTodor24/Controllers/Cart/cart_controller.dart';
 import 'package:dorTodor24/Controllers/Home/home_controller.dart';
 import 'package:dorTodor24/Controllers/Product/product_controller.dart';
 import 'package:dorTodor24/Helper/colors.dart';
 import 'package:dorTodor24/Helper/common_card.dart';
 import 'package:dorTodor24/Helper/common_image.dart';
-import 'package:dorTodor24/Helper/common_text_field.dart';
 import 'package:dorTodor24/Helper/string.dart';
-import 'package:dorTodor24/Views/Product/product_search_page.dart';
 import 'package:dorTodor24/Views/Product/sub_category_page.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +18,8 @@ class HomePage extends GetView<HomeController> {
     return GetBuilder<HomeController>(
       builder: (controller) {
         final productController = Get.put(ProductController());
+        final cartController = Get.put(CartController());
+
         return RefreshIndicator(
           onRefresh: () async {
             controller.getHome(context);

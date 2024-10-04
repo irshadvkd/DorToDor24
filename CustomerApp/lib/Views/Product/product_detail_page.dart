@@ -3,6 +3,7 @@ import 'package:dorTodor24/Helper/colors.dart';
 import 'package:dorTodor24/Helper/common_app_bar.dart';
 import 'package:dorTodor24/Helper/common_image.dart';
 import 'package:dorTodor24/Helper/string.dart';
+import 'package:dorTodor24/Modals/Product/cart_modal.dart';
 import 'package:dorTodor24/Views/Product/image_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -25,12 +26,13 @@ class ProductDetailPage extends GetView<ProductController> {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        Get.to(() => ImageView(image: currentIndex['image']));
+                        Get.to(
+                            () => ImageView(image: currentIndex['image'] ?? ""));
                       },
                       child: AspectRatio(
                         aspectRatio: 4 / 3,
                         child: CommonImage(
-                          url: currentIndex['image'],
+                          url: currentIndex['image'] ?? "",
                           radius: 0,
                           fit: BoxFit.contain,
                         ),
@@ -43,8 +45,8 @@ class ProductDetailPage extends GetView<ProductController> {
                         children: [
                           Text(
                             Get.locale!.languageCode == "en"
-                                ? currentIndex['nameEng']
-                                : currentIndex['nameAr'],
+                                ? currentIndex['nameEng']??""
+                                : currentIndex['nameAr']??"",
                             style: Theme.of(context).textTheme.titleLarge,
                           ),
                           const SizedBox(height: 8),
