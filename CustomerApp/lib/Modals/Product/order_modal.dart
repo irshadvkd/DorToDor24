@@ -1,79 +1,60 @@
 import 'dart:convert';
 
-/// status : 0
-/// user_id : "1"
-/// store_id : "1"
-/// amount : 0
-/// payment_type : 1
-/// building : "New"
-/// address : "Test"
-/// contact : "123456789"
-/// note : "Test Bite"
-/// updated_at : "2024-08-24T00:30:13.000000Z"
-/// created_at : "2024-08-24T00:30:13.000000Z"
-/// id : 6
-
 OrderModal orderModalFromJson(String str) =>
     OrderModal.fromJson(json.decode(str));
 String orderModalToJson(OrderModal data) => json.encode(data.toJson());
 
 class OrderModal {
   OrderModal({
-    this.status,
-    this.userId,
-    this.storeId,
-    this.amount,
-    this.paymentType,
-    this.building,
-    this.address,
-    this.contact,
-    this.note,
-    this.updatedAt,
-    this.createdAt,
-    this.id,
+    required this.orders, // Renamed to orders
   });
 
   OrderModal.fromJson(dynamic json) {
-    status = json['status'];
-    userId = json['user_id'];
-    storeId = json['store_id'];
-    amount = json['amount'];
-    paymentType = json['payment_type'];
-    building = json['building'];
-    address = json['address'];
-    contact = json['contact'];
-    note = json['note'];
-    updatedAt = json['updated_at'];
-    createdAt = json['created_at'];
-    id = json['id'];
+    // Expecting a list of orders directly
+    if (json is List) {
+      orders = json.map((order) => Order.fromJson(order)).toList();
+    }
   }
-  int? status;
-  String? userId;
-  String? storeId;
-  int? amount;
-  int? paymentType;
-  String? building;
-  String? address;
-  String? contact;
-  String? note;
-  String? updatedAt;
-  String? createdAt;
-  int? id;
+
+  List<Order> orders = []; // List of Order objects
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
-    map['status'] = status;
-    map['user_id'] = userId;
-    map['store_id'] = storeId;
-    map['amount'] = amount;
-    map['payment_type'] = paymentType;
-    map['building'] = building;
-    map['address'] = address;
-    map['contact'] = contact;
-    map['note'] = note;
-    map['updated_at'] = updatedAt;
-    map['created_at'] = createdAt;
+    map['orders'] = orders.map((order) => order.toJson()).toList();
+    return map;
+  }
+}
+
+class Order {
+  Order({
+    this.id,
+    this.status,
+    this.storeName,
+    this.amount,
+    this.createdAt,
+  });
+
+  Order.fromJson(dynamic json) {
+    id = json['id'];
+    status = json['status'];
+    storeName = json['store_name'];
+    amount = json['amount'];
+    createdAt = json['created_at'];
+  }
+
+  int? id;
+  int? status;
+  String? storeName;
+  String? amount;
+  String? createdAt;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
     map['id'] = id;
+    map['status'] = status;
+    map['store_name'] = storeName;
+    map['amount'] = amount;
+    map['created_at'] = createdAt;
     return map;
   }
 }

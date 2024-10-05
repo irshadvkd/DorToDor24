@@ -1,90 +1,78 @@
-import 'package:dorTodor24/Helper/common_app_bar.dart';
-import 'package:dorTodor24/Helper/common_card.dart';
-import 'package:dorTodor24/Helper/string.dart';
-import 'package:dorTodor24/Views/Menu/order_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../Controllers/Menu/order_controller.dart';
+import 'order_detail.dart';
 
-class OrdersPage extends StatelessWidget {
+class OrdersPage extends GetView<OrderController> {
   const OrdersPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return CommonAppBar(
-      title: 'My Orders',
-      actionEnable: false,
-      child: ListView.builder(
-        itemCount: 5,
-        padding: const EdgeInsets.all(16),
-        itemBuilder: (context, index) {
-          return orderItemCard(
-            context,
-            'Order #${index + 1}',
-            '15 May 2022 12:22 AM',
-            index,
-            () {
-              // Implement navigation to the order details page
-              debugPrint('Tapped on Order #${index + 1}');
-              Get.to(() => const OrderDetailsPage());
-            },
-          );
-        },
-      ),
+    return GetBuilder<OrderController>(
+      init: OrderController(),
+      builder: (controller) {
+        return Scaffold(
+          appBar: AppBar(
+            title: const Text('My Orders'),
+          ),
+          body: Expanded(
+            child: controller.order.isEmpty
+                ? const Center(child: Text('No orders found.'))
+                : ListView.builder(
+              itemCount: controller.order.length,
+              itemBuilder: (context, index) {
+                var currentOrder = controller.order[index];
+
+                return orderItemCard(
+                  context,
+                  'Order ${currentOrder.id ?? 'N/A'}',
+                  currentOrder.createdAt ?? 'N/A',
+                  getOrderStatus(currentOrder.status ?? -1), // Default to -1 if null
+                  currentOrder.amount ?? '0', // Default to '0' if null
+                      () {
+                    debugPrint('Tapped on Order #${currentOrder.id}');
+                    controller.orderDetails(context, '${currentOrder.id}');
+                    Get.to(() => const OrderDetailsPage());
+                  },
+                );
+              },
+            ),
+          ),
+        );
+      },
     );
   }
 
-  Widget orderItemCard(context, orderNumber, date, status, onTap) {
-    status = status % 2 == 0 ? 'Shipped' : 'Processing';
-    return CommonCard(
+
+  String getOrderStatus(int status) {
+    switch (status) {
+      case 0: return 'Pending';
+      case 1: return 'Accepted/Packing';
+      case 2: return 'On the way';
+      case 3: return 'Completed';
+      case 4: return 'Cancelled';
+      default: return 'Unknown';
+    }
+  }
+
+  Widget orderItemCard(BuildContext context, String orderNumber, String date, String status, String amount, VoidCallback onTap) {
+    return Card(
       margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.fromLTRB(12, 15, 12, 12),
-      onTap: onTap,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                orderNumber,
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
-              Text(
-                date,
-                style: Theme.of(context).textTheme.headlineSmall,
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          Row(
-            children: [
-              Text(
-                "Total: ",
-                style: Theme.of(context).textTheme.headlineSmall,
-              ),
-              Text(
-                "234 $currencyCode",
-                style: Theme.of(context).textTheme.headlineLarge,
-              ),
-            ],
-          ),
-          const SizedBox(height: 5),
-          Row(
-            children: [
-              Text(
-                "Status: ",
-                style: Theme.of(context).textTheme.headlineSmall,
-              ),
-              Expanded(
-                child: Text(
-                  status,
-                  style: Theme.of(context).textTheme.headlineMedium,
-                ),
-              ),
-              const Icon(Icons.chevron_right,)
-            ],
-          ),
-        ],
+      child: ListTile(
+        title: Text(
+          orderNumber,
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
+        subtitle: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text("Order Date: $date", style: Theme.of(context).textTheme.bodySmall),
+            Text("Total: $amount KWD", style: Theme.of(context).textTheme.bodyLarge),
+            Text("Status: $status", style: Theme.of(context).textTheme.bodyMedium),
+          ],
+        ),
+        trailing: const Icon(Icons.chevron_right),
+        onTap: onTap,
       ),
     );
   }

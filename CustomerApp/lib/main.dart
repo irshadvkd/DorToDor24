@@ -12,6 +12,9 @@ import 'package:dorTodor24/Helper/language.dart';
 import 'package:dorTodor24/Views/Auth/login_page.dart';
 import 'package:dorTodor24/Views/Auth/splash_screen.dart';
 
+import 'Controllers/Menu/order_controller.dart';
+import 'Views/Menu/order_page.dart';
+
 class MyHttpOverrides extends HttpOverrides {
   @override
   HttpClient createHttpClient(SecurityContext? context) {
@@ -109,6 +112,7 @@ void main(context) async {
   //   }
   // });
   // FirebaseMessaging.onBackgroundMessage(onBackgroundMessageHandler);
+  Get.put(OrderController());
   runApp(const MyApp());
 }
 //
@@ -243,6 +247,7 @@ class _MyAppState extends State<MyApp> {
         '/home': (context) => const HomeAppBar(),
         // '/place': (context) => PlaceSelectPage(),
         '/language': (context) => const LanguagePage(),
+        // '/language': (context) => OrdersPage(),
         // '/morePage': (context) => MorePage(),
       },
     );

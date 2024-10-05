@@ -93,40 +93,6 @@ class LoginPage extends GetView<HomeController> {
                               ),
                             ),
                       const SizedBox(height: 10),
-                      // Row(
-                      //   children: <Widget>[
-                      //     Text(
-                      //       'loginEasily'.tr,
-                      //       style: Theme.of(context)
-                      //           .textTheme
-                      //           .headline6!
-                      //           .copyWith(
-                      //               fontWeight: FontWeight.normal,
-                      //               color: colors.border),
-                      //     ),
-                      //     const SizedBox(width: 5),
-                      //     InkWell(
-                      //       child: Text(
-                      //         'loginQR'.tr,
-                      //         style: Theme.of(context)
-                      //             .textTheme
-                      //             .headline5!
-                      //             .copyWith(color: colors.white),
-                      //       ),
-                      //     ),
-                      //   ],
-                      //   mainAxisAlignment: MainAxisAlignment.center,
-                      // ),
-                      // const SizedBox(height: 20),
-                      // InkWell(
-                      //   child: Text(
-                      //     'forgotPass'.tr,
-                      //     style: Theme.of(context)
-                      //         .textTheme
-                      //         .headline5!
-                      //         .copyWith(color: colors.white),
-                      //   ),
-                      // ),
                     ],
                   ),
                 ),
