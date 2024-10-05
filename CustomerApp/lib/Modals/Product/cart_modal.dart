@@ -1,11 +1,14 @@
 import 'dart:convert';
+
 /// data : [{"id":4,"product_id":2,"pro_qty":2,"name_eng":"Tomato","name_ar":"طماطم","image":"/public/product/cIuh5qPsNXdBHrLHOWXoghNb9eIETF.png","price":"6.000","unit_eng":"Pack","unit_ar":"علية"},{"id":5,"product_id":5,"pro_qty":2,"name_eng":"Carrot","name_ar":"جزرة","image":"/public/product/tLvBrIMEhbuVgDBIzMI2KjYf1q6Ge0.png","price":"4","unit_eng":"Box","unit_ar":"صندوق"},{"id":6,"product_id":1,"pro_qty":2,"name_eng":"Indian Green Chilli","name_ar":"الفلفل الأخضر الهندي","image":"/public/product/0sKEz8vwaykJbLZx17dLr1G6EOK2WZ.png","price":"7.499","unit_eng":"Pack","unit_ar":"علية"}]
 
 CartModal cartModalFromJson(String str) => CartModal.fromJson(json.decode(str));
 String cartModalToJson(CartModal data) => json.encode(data.toJson());
+
 class CartModal {
   CartModal({
-      this.data,});
+    this.data,
+  });
 
   CartModal.fromJson(dynamic json) {
     if (json['data'] != null) {
@@ -24,7 +27,6 @@ class CartModal {
     }
     return map;
   }
-
 }
 
 /// id : 4
@@ -39,17 +41,19 @@ class CartModal {
 
 Data dataFromJson(String str) => Data.fromJson(json.decode(str));
 String dataToJson(Data data) => json.encode(data.toJson());
+
 class Data {
   Data({
-      this.id, 
-      this.productId, 
-      this.proQty, 
-      this.nameEng, 
-      this.nameAr, 
-      this.image, 
-      this.price, 
-      this.unitEng, 
-      this.unitAr,});
+    this.id,
+    this.productId,
+    this.proQty,
+    this.nameEng,
+    this.nameAr,
+    this.image,
+    this.price,
+    this.unitEng,
+    this.unitAr,
+  });
 
   Data.fromJson(dynamic json) {
     id = json['id'];
@@ -85,5 +89,4 @@ class Data {
     map['unit_ar'] = unitAr;
     return map;
   }
-
 }
