@@ -204,4 +204,11 @@ class HomeController extends GetxController {
     productController.update();
     update();
   }
+
+  // Login Password visibility
+  var obscurePassword = true.obs;
+  void togglePasswordVisibility() {
+    obscurePassword.value = !obscurePassword.value;
+  }
+
 }

@@ -14,6 +14,7 @@ import 'package:dorTodor24/Views/Auth/splash_screen.dart';
 
 import 'Controllers/Menu/order_controller.dart';
 import 'Views/Menu/order_page.dart';
+import 'Views/Auth/place_page.dart';
 
 class MyHttpOverrides extends HttpOverrides {
   @override
@@ -245,7 +246,7 @@ class _MyAppState extends State<MyApp> {
         '/': (context) => const SplashScreen(),
         '/login': (context) => LoginPage(),
         '/home': (context) => const HomeAppBar(),
-        // '/place': (context) => PlaceSelectPage(),
+        '/place': (context) => const PlaceSelectPage(),
         '/language': (context) => const LanguagePage(),
         // '/morePage': (context) => MorePage(),
       },

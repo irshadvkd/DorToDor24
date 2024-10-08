@@ -6,6 +6,7 @@ import 'package:dorTodor24/Views/Product/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../Controllers/Cart/cart_controller.dart';
 import '../../Helper/colors.dart';
 import 'cart_page.dart';
 
@@ -16,6 +17,7 @@ class ProductPage extends GetView<ProductController> {
 
   @override
   Widget build(BuildContext context) {
+    var cartController = Get.put(CartController());
     return GetBuilder<ProductController>(
       builder: (controller) {
         return CommonAppBar(
@@ -69,6 +71,9 @@ class ProductPage extends GetView<ProductController> {
                     children: [
                       GestureDetector(
                         onTap: () {
+                          cartController.loadCartFromSession();
+                          Get.to(() => const CartPage(hideAppBar: false));
+                          controller.update();
                           // controller.getNotification(context);
                           // Get.offAndToNamed("/home");
                           // var productController =

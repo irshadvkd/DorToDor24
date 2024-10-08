@@ -110,7 +110,7 @@ class _OrderSuccessPopupState extends State<OrderSuccessPopup>
               //   color: Colors.green,
               // ),
               child: const Image(
-                image: AssetImage('assets/icons/logo.png'),
+                image: AssetImage('assets/icons/dortodor_ordercomplete.png'),
                 width: 200,
               ),
               builder: (BuildContext context, Widget? child) {
