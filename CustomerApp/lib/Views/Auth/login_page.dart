@@ -58,6 +58,7 @@ class LoginPage extends GetView<HomeController> {
                         hintText: 'password'.tr,
                         textCapitalization: TextCapitalization.none,
                         textController: controller.password,
+                        obSecureText: controller.obscurePassword.value,
                         obSecureText: _obscurePassword,
                         suffixIcon: IconButton(
                           icon: Icon(

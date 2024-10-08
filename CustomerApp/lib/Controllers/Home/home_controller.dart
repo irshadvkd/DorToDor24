@@ -8,6 +8,8 @@ import 'package:dorTodor24/Modals/Home/location_modal.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
+import '../../Views/Auth/auth_service.dart';
+
 class HomeController extends GetxController {
   TextEditingController userName = TextEditingController();
   TextEditingController password = TextEditingController();
@@ -48,9 +50,10 @@ class HomeController extends GetxController {
   };
 
   Future loginUser(context) async {
-    Get.offAndToNamed("/home");
-    getHome(context);
-    update();
+    // Get.offAndToNamed("/home");
+    // getHome(context);
+    gotoHome(context);
+    // update();
   }
 
   HomeModal? homeModal;
@@ -59,7 +62,7 @@ class HomeController extends GetxController {
     // if (isNetworkAvail) {
       homeLoader = false;
       update();
-      var response = await getAPI(context, "home/user?userId=1");
+      var response = await postAPI(context, "auth/login", );
       if (response['status'] == true) {
         homeModal = HomeModal.fromJson(response['body']);
         language = english;
@@ -71,6 +74,37 @@ class HomeController extends GetxController {
     // }
     update();
   }
+
+  Future<void> gotoHome(BuildContext context) async {
+    isNetworkAvail = await isNetworkAvailable();
+    if (isNetworkAvail) {
+      homeLoader = false;
+      update();
+
+      var body = jsonEncode({'username': userName, 'password': password});
+      var response = await postAPI(context, "auth/login", body);
+
+      if (response['status'] == true) {
+        print('------ User Login Success ------');
+        String token = response['body']['token'];
+
+        // Save the token to local storage
+        await AuthService.saveUserToken(token);
+
+        // Navigate to the home page
+        Get.offAndToNamed("/home");
+      } else {
+        // Show error message
+        showSnackBar(context, "Login failed: ${response['statusCode']}");
+      }
+
+      homeLoader = true;
+      update();
+    } else {
+      showSnackBar(context, "No network available");
+    }
+  }
+
 
   LocationModal? locationModal;
   Future getLocation(context) async {

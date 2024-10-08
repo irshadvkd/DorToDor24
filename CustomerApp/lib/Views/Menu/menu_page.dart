@@ -9,11 +9,14 @@ import 'package:dorTodor24/Views/Menu/terms_and_policy.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../Controllers/Menu/order_controller.dart';
+
 class MenuPage extends GetView<HomeController> {
   const MenuPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final OrderController orderController = Get.find<OrderController>();
     return GetBuilder<HomeController>(
       builder: (controller) {
         return SingleChildScrollView(
@@ -42,6 +45,7 @@ class MenuPage extends GetView<HomeController> {
                   Icons.history,
                   "My Orders",
                   () {
+                    orderController.getOrder(context, '3');
                     Get.to(() => const OrdersPage());
                   },
                 ),
