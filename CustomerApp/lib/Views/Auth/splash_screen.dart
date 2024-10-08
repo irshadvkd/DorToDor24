@@ -35,7 +35,7 @@ class _SplashScreenState extends State<SplashScreen> {
     // Get any messages which caused the application to open from
     // a terminated state.
     RemoteMessage? initialMessage =
-        await FirebaseMessaging.instance.getInitialMessage();
+    await FirebaseMessaging.instance.getInitialMessage();
 
     // If the message also contains a data property with a "type" of "chat",
     // navigate to a chat screen
@@ -201,8 +201,8 @@ class _SplashScreenState extends State<SplashScreen> {
       // setupInteractedMessage();
     } else {
       homeController.getHome(context);
-      // Get.offAndToNamed('/language');
-      Get.offAndToNamed('/login');
+      Get.offAndToNamed('/language');
+      // Get.offAndToNamed('/login');
     }
   }
 }

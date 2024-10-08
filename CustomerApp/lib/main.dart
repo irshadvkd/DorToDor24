@@ -12,10 +12,6 @@ import 'package:dorTodor24/Helper/language.dart';
 import 'package:dorTodor24/Views/Auth/login_page.dart';
 import 'package:dorTodor24/Views/Auth/splash_screen.dart';
 
-import 'Controllers/Menu/order_controller.dart';
-import 'Views/Menu/order_page.dart';
-import 'Views/Auth/place_page.dart';
-
 class MyHttpOverrides extends HttpOverrides {
   @override
   HttpClient createHttpClient(SecurityContext? context) {
@@ -113,7 +109,6 @@ void main(context) async {
   //   }
   // });
   // FirebaseMessaging.onBackgroundMessage(onBackgroundMessageHandler);
-  Get.put(OrderController());
   runApp(const MyApp());
 }
 //
@@ -182,63 +177,63 @@ class _MyAppState extends State<MyApp> {
             fontSize: 19,
             color: colors.textMain,
             fontFamily:
-                prefs!.getBool('isArabic') == true ? 'Almarai' : 'Amiko',
+            prefs!.getBool('isArabic') == true ? 'Almarai' : 'Amiko',
           ),
           titleMedium: TextStyle(
             fontWeight: FontWeight.w400,
             fontSize: 19,
             color: colors.textMain,
             fontFamily:
-                prefs!.getBool('isArabic') == true ? 'Almarai' : 'Amiko',
+            prefs!.getBool('isArabic') == true ? 'Almarai' : 'Amiko',
           ),
           titleSmall: TextStyle(
             fontWeight: FontWeight.w400,
             fontSize: 17,
             color: colors.textMain,
             fontFamily:
-                prefs!.getBool('isArabic') == true ? 'Almarai' : 'Amiko',
+            prefs!.getBool('isArabic') == true ? 'Almarai' : 'Amiko',
           ),
           headlineLarge: TextStyle(
             fontWeight: FontWeight.w600,
             fontSize: 15,
             color: colors.textMain,
             fontFamily:
-                prefs!.getBool('isArabic') == true ? 'Almarai' : 'Amiko',
+            prefs!.getBool('isArabic') == true ? 'Almarai' : 'Amiko',
           ),
           headlineMedium: TextStyle(
             fontWeight: FontWeight.w400,
             fontSize: 15,
             color: colors.textMain,
             fontFamily:
-                prefs!.getBool('isArabic') == true ? 'Almarai' : 'Amiko',
+            prefs!.getBool('isArabic') == true ? 'Almarai' : 'Amiko',
           ),
           headlineSmall: TextStyle(
             fontWeight: FontWeight.w400,
             fontSize: 13,
             color: colors.textMain,
             fontFamily:
-                prefs!.getBool('isArabic') == true ? 'Almarai' : 'Amiko',
+            prefs!.getBool('isArabic') == true ? 'Almarai' : 'Amiko',
           ),
           labelLarge: TextStyle(
             fontWeight: FontWeight.w400,
             fontSize: 12,
             color: colors.textMain,
             fontFamily:
-                prefs!.getBool('isArabic') == true ? 'Almarai' : 'Amiko',
+            prefs!.getBool('isArabic') == true ? 'Almarai' : 'Amiko',
           ),
           labelMedium: TextStyle(
             fontWeight: FontWeight.w400,
             fontSize: 11,
             color: colors.textMain,
             fontFamily:
-                prefs!.getBool('isArabic') == true ? 'Almarai' : 'Amiko',
+            prefs!.getBool('isArabic') == true ? 'Almarai' : 'Amiko',
           ),
           labelSmall: TextStyle(
             fontWeight: FontWeight.w600,
             fontSize: 9,
             color: colors.textMain,
             fontFamily:
-                prefs!.getBool('isArabic') == true ? 'Almarai' : 'Amiko',
+            prefs!.getBool('isArabic') == true ? 'Almarai' : 'Amiko',
           ),
         ),
       ),
@@ -246,7 +241,7 @@ class _MyAppState extends State<MyApp> {
         '/': (context) => const SplashScreen(),
         '/login': (context) => LoginPage(),
         '/home': (context) => const HomeAppBar(),
-        '/place': (context) => const PlaceSelectPage(),
+        // '/place': (context) => PlaceSelectPage(),
         '/language': (context) => const LanguagePage(),
         // '/morePage': (context) => MorePage(),
       },
