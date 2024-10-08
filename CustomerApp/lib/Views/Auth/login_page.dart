@@ -11,6 +11,8 @@ class LoginPage extends GetView<HomeController> {
   LoginPage({Key? key}) : super(key: key);
   final _formKey = GlobalKey<FormState>();
 
+  bool _obscurePassword = true;
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
@@ -56,7 +58,17 @@ class LoginPage extends GetView<HomeController> {
                         hintText: 'password'.tr,
                         textCapitalization: TextCapitalization.none,
                         textController: controller.password,
-                        obSecureText: true,
+                        obSecureText: controller.obscurePassword.value,
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            controller.obscurePassword.value
+                                ? Icons.visibility_off
+                                : Icons.visibility,
+                          ),
+                          onPressed: () {
+                            controller.togglePasswordVisibility();
+                          },
+                        ),
                         borderRadius: 50,
                         fillColor: colors.lightWhite,
                         borderColor: colors.textMain,
@@ -93,6 +105,40 @@ class LoginPage extends GetView<HomeController> {
                               ),
                             ),
                       const SizedBox(height: 10),
+                      // Row(
+                      //   children: <Widget>[
+                      //     Text(
+                      //       'loginEasily'.tr,
+                      //       style: Theme.of(context)
+                      //           .textTheme
+                      //           .headline6!
+                      //           .copyWith(
+                      //               fontWeight: FontWeight.normal,
+                      //               color: colors.border),
+                      //     ),
+                      //     const SizedBox(width: 5),
+                      //     InkWell(
+                      //       child: Text(
+                      //         'loginQR'.tr,
+                      //         style: Theme.of(context)
+                      //             .textTheme
+                      //             .headline5!
+                      //             .copyWith(color: colors.white),
+                      //       ),
+                      //     ),
+                      //   ],
+                      //   mainAxisAlignment: MainAxisAlignment.center,
+                      // ),
+                      // const SizedBox(height: 20),
+                      // InkWell(
+                      //   child: Text(
+                      //     'forgotPass'.tr,
+                      //     style: Theme.of(context)
+                      //         .textTheme
+                      //         .headline5!
+                      //         .copyWith(color: colors.white),
+                      //   ),
+                      // ),
                     ],
                   ),
                 ),

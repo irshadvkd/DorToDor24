@@ -62,7 +62,7 @@ class HomeController extends GetxController {
     // if (isNetworkAvail) {
       homeLoader = false;
       update();
-      var response = await getAPI(context, "home/user?userId=1");
+      var response = await postAPI(context, "auth/login", );
       if (response['status'] == true) {
         homeModal = HomeModal.fromJson(response['body']);
         language = english;

@@ -247,7 +247,6 @@ class _MyAppState extends State<MyApp> {
         '/home': (context) => const HomeAppBar(),
         // '/place': (context) => PlaceSelectPage(),
         '/language': (context) => const LanguagePage(),
-        // '/language': (context) => OrdersPage(),
         // '/morePage': (context) => MorePage(),
       },
     );
