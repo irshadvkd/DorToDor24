@@ -201,8 +201,8 @@ class _SplashScreenState extends State<SplashScreen> {
       // setupInteractedMessage();
     } else {
       homeController.getHome(context);
-      Get.offAndToNamed('/language');
-      // Get.offAndToNamed('/login');
+      // Get.offAndToNamed('/language');
+      Get.offAndToNamed('/login');
     }
   }
 }

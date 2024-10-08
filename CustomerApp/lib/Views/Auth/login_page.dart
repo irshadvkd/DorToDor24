@@ -11,6 +11,8 @@ class LoginPage extends GetView<HomeController> {
   LoginPage({Key? key}) : super(key: key);
   final _formKey = GlobalKey<FormState>();
 
+  bool _obscurePassword = true;
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
@@ -56,7 +58,17 @@ class LoginPage extends GetView<HomeController> {
                         hintText: 'password'.tr,
                         textCapitalization: TextCapitalization.none,
                         textController: controller.password,
-                        obSecureText: true,
+                        obSecureText: _obscurePassword,
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            controller.obscurePassword.value
+                                ? Icons.visibility_off
+                                : Icons.visibility,
+                          ),
+                          onPressed: () {
+                            controller.togglePasswordVisibility();
+                          },
+                        ),
                         borderRadius: 50,
                         fillColor: colors.lightWhite,
                         borderColor: colors.textMain,

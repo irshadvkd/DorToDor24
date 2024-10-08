@@ -12,6 +12,8 @@ import 'package:dorTodor24/Helper/language.dart';
 import 'package:dorTodor24/Views/Auth/login_page.dart';
 import 'package:dorTodor24/Views/Auth/splash_screen.dart';
 
+import 'Views/Auth/place_page.dart';
+
 class MyHttpOverrides extends HttpOverrides {
   @override
   HttpClient createHttpClient(SecurityContext? context) {
@@ -241,7 +243,7 @@ class _MyAppState extends State<MyApp> {
         '/': (context) => const SplashScreen(),
         '/login': (context) => LoginPage(),
         '/home': (context) => const HomeAppBar(),
-        // '/place': (context) => PlaceSelectPage(),
+        '/place': (context) => const PlaceSelectPage(),
         '/language': (context) => const LanguagePage(),
         // '/morePage': (context) => MorePage(),
       },
