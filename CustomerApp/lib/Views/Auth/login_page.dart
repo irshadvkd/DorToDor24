@@ -11,8 +11,6 @@ class LoginPage extends GetView<HomeController> {
   LoginPage({Key? key}) : super(key: key);
   final _formKey = GlobalKey<FormState>();
 
-  bool _obscurePassword = true;
-
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
@@ -47,7 +45,7 @@ class LoginPage extends GetView<HomeController> {
                         fillColor: colors.lightWhite,
                         borderColor: colors.textMain,
                         contentPadding:
-                            const EdgeInsets.fromLTRB(25, 20, 25, 20),
+                        const EdgeInsets.fromLTRB(25, 20, 25, 20),
                         maxLines: 1,
                         validator: (value) {
                           return commonValidator(value, "requireUserName".tr);
@@ -58,23 +56,12 @@ class LoginPage extends GetView<HomeController> {
                         hintText: 'password'.tr,
                         textCapitalization: TextCapitalization.none,
                         textController: controller.password,
-                        obSecureText: controller.obscurePassword.value,
-                        obSecureText: _obscurePassword,
-                        suffixIcon: IconButton(
-                          icon: Icon(
-                            controller.obscurePassword.value
-                                ? Icons.visibility_off
-                                : Icons.visibility,
-                          ),
-                          onPressed: () {
-                            controller.togglePasswordVisibility();
-                          },
-                        ),
+                        obSecureText: true,
                         borderRadius: 50,
                         fillColor: colors.lightWhite,
                         borderColor: colors.textMain,
                         contentPadding:
-                            const EdgeInsets.fromLTRB(25, 20, 25, 20),
+                        const EdgeInsets.fromLTRB(25, 20, 25, 20),
                         maxLines: 1,
                         validator: (value) {
                           return commonValidator(value, "requireUserPass".tr);
@@ -84,27 +71,27 @@ class LoginPage extends GetView<HomeController> {
                       controller.buttonLoader
                           ? CommonButton(
                         color: colors.themeButton,
-                              text: 'login'.tr,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleMedium!
-                                  .copyWith(color: colors.white),
-                              height: 50,
-                              radius: 50,
-                              margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                              onTap: () async {
-                                if (_formKey.currentState!.validate()) {
-                                  controller.loginUser(context);
-                                }
-                              },
-                            )
+                        text: 'login'.tr,
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleMedium!
+                            .copyWith(color: colors.white),
+                        height: 50,
+                        radius: 50,
+                        margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                        onTap: () async {
+                          if (_formKey.currentState!.validate()) {
+                            controller.loginUser(context);
+                          }
+                        },
+                      )
                           : const Padding(
-                              padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                              child: ButtonLoader(
-                                radius: 50,
-                                height: 45,
-                              ),
-                            ),
+                        padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                        child: ButtonLoader(
+                          radius: 50,
+                          height: 45,
+                        ),
+                      ),
                       const SizedBox(height: 10),
                       // Row(
                       //   children: <Widget>[
