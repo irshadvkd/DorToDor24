@@ -3,6 +3,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:dorTodor24/Controllers/Home/home_controller.dart';
+import 'package:dorTodor24/Controllers/Menu/order_controller.dart';
 import 'package:dorTodor24/Controllers/Product/product_controller.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -35,7 +36,7 @@ class _SplashScreenState extends State<SplashScreen> {
     // Get any messages which caused the application to open from
     // a terminated state.
     RemoteMessage? initialMessage =
-    await FirebaseMessaging.instance.getInitialMessage();
+        await FirebaseMessaging.instance.getInitialMessage();
 
     // If the message also contains a data property with a "type" of "chat",
     // navigate to a chat screen
@@ -184,25 +185,28 @@ class _SplashScreenState extends State<SplashScreen> {
   Future<void> navigationPage() async {
     final homeController = Get.put(HomeController());
     Get.put(ProductController());
+    Get.put(OrderController());
     bool isLogin = false;
+    bool isSelectLocation = false;
     SharedPreferences prefs = await SharedPreferences.getInstance();
     if (prefs.getBool('isLogin') != null) {
       isLogin = prefs.getBool('isLogin')!;
     }
+    if (prefs.getBool('isSelectLocation') != null) {
+      isSelectLocation = prefs.getBool('isSelectLocation')!;
+    }
     debugPrint("Whether device already login or not : $isLogin");
     if (isLogin == true) {
-      // final prefs = await SharedPreferences.getInstance();
-      // homeController.getHome(context);
-      Get.offAndToNamed('/home');
-
       setupInteractedMessage();
-      homeController.getHome(context);
-      // Get.offAndToNamed('/home');
-      // setupInteractedMessage();
+      if (isSelectLocation == true) {
+        homeController.getHome(context);
+        Get.offAndToNamed('/home');
+      } else {
+        homeController.getLocation(context);
+        Get.offAndToNamed('/place');
+      }
     } else {
-      homeController.getHome(context);
       Get.offAndToNamed('/language');
-      // Get.offAndToNamed('/login');
     }
   }
 }

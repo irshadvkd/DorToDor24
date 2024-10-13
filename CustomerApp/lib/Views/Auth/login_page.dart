@@ -1,3 +1,4 @@
+import 'package:dorTodor24/Views/Auth/signup_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:dorTodor24/Controllers/Home/home_controller.dart';
@@ -8,7 +9,7 @@ import 'package:dorTodor24/Helper/common_text_field.dart';
 import 'package:dorTodor24/Helper/session.dart';
 
 class LoginPage extends GetView<HomeController> {
-  LoginPage({Key? key}) : super(key: key);
+  LoginPage({super.key});
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -45,7 +46,7 @@ class LoginPage extends GetView<HomeController> {
                         fillColor: colors.lightWhite,
                         borderColor: colors.textMain,
                         contentPadding:
-                        const EdgeInsets.fromLTRB(25, 20, 25, 20),
+                            const EdgeInsets.fromLTRB(25, 20, 25, 20),
                         maxLines: 1,
                         validator: (value) {
                           return commonValidator(value, "requireUserName".tr);
@@ -61,7 +62,7 @@ class LoginPage extends GetView<HomeController> {
                         fillColor: colors.lightWhite,
                         borderColor: colors.textMain,
                         contentPadding:
-                        const EdgeInsets.fromLTRB(25, 20, 25, 20),
+                            const EdgeInsets.fromLTRB(25, 20, 25, 20),
                         maxLines: 1,
                         validator: (value) {
                           return commonValidator(value, "requireUserPass".tr);
@@ -70,29 +71,49 @@ class LoginPage extends GetView<HomeController> {
                       const SizedBox(height: 10),
                       controller.buttonLoader
                           ? CommonButton(
-                        color: colors.themeButton,
-                        text: 'login'.tr,
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleMedium!
-                            .copyWith(color: colors.white),
-                        height: 50,
-                        radius: 50,
-                        margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                        onTap: () async {
-                          if (_formKey.currentState!.validate()) {
-                            controller.loginUser(context);
-                          }
-                        },
-                      )
+                              color: colors.themeButton,
+                              text: 'login'.tr,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleMedium!
+                                  .copyWith(color: colors.white),
+                              height: 50,
+                              radius: 50,
+                              margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                              onTap: () async {
+                                if (_formKey.currentState!.validate()) {
+                                  controller.loginUser(context);
+                                }
+                              },
+                            )
                           : const Padding(
-                        padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                        child: ButtonLoader(
-                          radius: 50,
-                          height: 45,
-                        ),
-                      ),
+                              padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                              child: ButtonLoader(
+                                radius: 50,
+                                height: 45,
+                              ),
+                            ),
                       const SizedBox(height: 10),
+
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Don't have an account?",
+                            style: Theme.of(context).textTheme.headlineMedium,
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              Get.to(() => SignUpPage());
+                            },
+                            child: Text(
+                              "Register ",
+                              style: Theme.of(context).textTheme.headlineLarge,
+                            ),
+                          ),
+                        ],
+                      )
                       // Row(
                       //   children: <Widget>[
                       //     Text(

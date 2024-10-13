@@ -8,6 +8,7 @@ import 'package:dorTodor24/Views/Menu/order_page.dart';
 import 'package:dorTodor24/Views/Menu/terms_and_policy.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../Controllers/Menu/order_controller.dart';
 
@@ -45,7 +46,7 @@ class MenuPage extends GetView<HomeController> {
                   Icons.history,
                   "My Orders",
                   () {
-                    orderController.getOrder(context, '3');
+                    orderController.getOrder(context);
                     Get.to(() => const OrdersPage());
                   },
                 ),
@@ -69,7 +70,10 @@ class MenuPage extends GetView<HomeController> {
                   context,
                   Icons.logout,
                   "Logout",
-                  () {
+                  () async {
+                    var prefs = await SharedPreferences.getInstance();
+                    prefs.setBool("isLogin", false);
+                    prefs.setBool("isSelectLocation", false);
                     Get.offAllNamed("/login");
                   },
                 ),
@@ -100,7 +104,10 @@ class MenuPage extends GetView<HomeController> {
               style: Theme.of(context).textTheme.titleSmall,
             ),
           ),
-          const Icon(Icons.chevron_right,color: colors.themeButton,),
+          const Icon(
+            Icons.chevron_right,
+            color: colors.themeButton,
+          ),
         ],
       ),
     );

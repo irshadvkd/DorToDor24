@@ -1,0 +1,57 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
+
+class CommonImage extends StatelessWidget {
+  final String url;
+  final double? width;
+  final double? height;
+  final BoxFit? fit;
+  final double? radius;
+  const CommonImage(
+      {Key? key,
+      required this.url,
+      this.width,
+      this.height,
+      this.fit,
+      this.radius})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    print(url);
+    return CachedNetworkImage(
+      imageUrl: url,
+      imageBuilder: (context, imageProvider) {
+        return Container(
+          width: width,
+          height: height,
+          clipBehavior: Clip.antiAliasWithSaveLayer,
+          decoration: BoxDecoration(
+            color: Colors.transparent,
+            borderRadius: BorderRadius.circular(radius ?? 6),
+            image: DecorationImage(
+              image: imageProvider,
+              fit: fit ?? BoxFit.fill,
+            ),
+          ),
+        );
+      },
+      placeholder: (context, url) {
+        return Container(
+          width: width,
+          height: height,
+          alignment: Alignment.center,
+          child: const CircularProgressIndicator(),
+        );
+      },
+      errorWidget: (context, url, error) {
+        return Container(
+          width: width,
+          height: height,
+          alignment: Alignment.center,
+          child: const Icon(Icons.error),
+        );
+      },
+    );
+  }
+}

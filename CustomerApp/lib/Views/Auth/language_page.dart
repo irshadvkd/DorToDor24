@@ -2,6 +2,7 @@ import 'package:dorTodor24/Controllers/Home/home_controller.dart';
 import 'package:dorTodor24/Helper/colors.dart';
 import 'package:dorTodor24/Helper/common_button.dart';
 import 'package:dorTodor24/Helper/common_card.dart';
+import 'package:dorTodor24/Views/Auth/login_page.dart';
 import 'package:dorTodor24/Views/Auth/phone_no_page.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
@@ -94,7 +95,7 @@ class LanguagePage extends GetView<HomeController> {
                 margin: const EdgeInsets.fromLTRB(0, 60, 0, 60),
                 color: colors.themeButton,
                 onTap: () {
-                  Get.to(() => const PhoneNoPage());
+                  Get.to(() =>  LoginPage());
                 },
               ),
 

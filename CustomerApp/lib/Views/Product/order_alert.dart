@@ -1,3 +1,4 @@
+import 'package:dorTodor24/Controllers/Cart/cart_controller.dart';
 import 'package:dorTodor24/Controllers/Product/product_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:dorTodor24/Helper/colors.dart';
@@ -54,6 +55,9 @@ class OrderAlert extends GetView<ProductController> {
                         child: GestureDetector(
                           onTap: () {
                             if (controller.orderLoader) {
+                              final cartController = Get.put(CartController());
+                              print(cartController.cartItems[0].id);
+                              print(cartController.cartItems[0].nameEng);
                               controller.confirmOrder(context, storeId);
                             }
                           },
