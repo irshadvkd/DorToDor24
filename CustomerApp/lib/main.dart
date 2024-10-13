@@ -177,63 +177,63 @@ class _MyAppState extends State<MyApp> {
             fontSize: 19,
             color: colors.textMain,
             fontFamily:
-                prefs!.getBool('isArabic') == true ? 'Almarai' : 'Amiko',
+            prefs!.getBool('isArabic') == true ? 'Almarai' : 'Amiko',
           ),
           titleMedium: TextStyle(
             fontWeight: FontWeight.w400,
             fontSize: 19,
             color: colors.textMain,
             fontFamily:
-                prefs!.getBool('isArabic') == true ? 'Almarai' : 'Amiko',
+            prefs!.getBool('isArabic') == true ? 'Almarai' : 'Amiko',
           ),
           titleSmall: TextStyle(
             fontWeight: FontWeight.w400,
             fontSize: 17,
             color: colors.textMain,
             fontFamily:
-                prefs!.getBool('isArabic') == true ? 'Almarai' : 'Amiko',
+            prefs!.getBool('isArabic') == true ? 'Almarai' : 'Amiko',
           ),
           headlineLarge: TextStyle(
             fontWeight: FontWeight.w600,
             fontSize: 15,
             color: colors.textMain,
             fontFamily:
-                prefs!.getBool('isArabic') == true ? 'Almarai' : 'Amiko',
+            prefs!.getBool('isArabic') == true ? 'Almarai' : 'Amiko',
           ),
           headlineMedium: TextStyle(
             fontWeight: FontWeight.w400,
             fontSize: 15,
             color: colors.textMain,
             fontFamily:
-                prefs!.getBool('isArabic') == true ? 'Almarai' : 'Amiko',
+            prefs!.getBool('isArabic') == true ? 'Almarai' : 'Amiko',
           ),
           headlineSmall: TextStyle(
             fontWeight: FontWeight.w400,
             fontSize: 13,
             color: colors.textMain,
             fontFamily:
-                prefs!.getBool('isArabic') == true ? 'Almarai' : 'Amiko',
+            prefs!.getBool('isArabic') == true ? 'Almarai' : 'Amiko',
           ),
           labelLarge: TextStyle(
             fontWeight: FontWeight.w400,
             fontSize: 12,
             color: colors.textMain,
             fontFamily:
-                prefs!.getBool('isArabic') == true ? 'Almarai' : 'Amiko',
+            prefs!.getBool('isArabic') == true ? 'Almarai' : 'Amiko',
           ),
           labelMedium: TextStyle(
             fontWeight: FontWeight.w400,
             fontSize: 11,
             color: colors.textMain,
             fontFamily:
-                prefs!.getBool('isArabic') == true ? 'Almarai' : 'Amiko',
+            prefs!.getBool('isArabic') == true ? 'Almarai' : 'Amiko',
           ),
           labelSmall: TextStyle(
             fontWeight: FontWeight.w600,
             fontSize: 9,
             color: colors.textMain,
             fontFamily:
-                prefs!.getBool('isArabic') == true ? 'Almarai' : 'Amiko',
+            prefs!.getBool('isArabic') == true ? 'Almarai' : 'Amiko',
           ),
         ),
       ),

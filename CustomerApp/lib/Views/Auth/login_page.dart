@@ -45,7 +45,7 @@ class LoginPage extends GetView<HomeController> {
                         fillColor: colors.lightWhite,
                         borderColor: colors.textMain,
                         contentPadding:
-                            const EdgeInsets.fromLTRB(25, 20, 25, 20),
+                        const EdgeInsets.fromLTRB(25, 20, 25, 20),
                         maxLines: 1,
                         validator: (value) {
                           return commonValidator(value, "requireUserName".tr);
@@ -61,7 +61,7 @@ class LoginPage extends GetView<HomeController> {
                         fillColor: colors.lightWhite,
                         borderColor: colors.textMain,
                         contentPadding:
-                            const EdgeInsets.fromLTRB(25, 20, 25, 20),
+                        const EdgeInsets.fromLTRB(25, 20, 25, 20),
                         maxLines: 1,
                         validator: (value) {
                           return commonValidator(value, "requireUserPass".tr);
@@ -71,27 +71,27 @@ class LoginPage extends GetView<HomeController> {
                       controller.buttonLoader
                           ? CommonButton(
                         color: colors.themeButton,
-                              text: 'login'.tr,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleMedium!
-                                  .copyWith(color: colors.white),
-                              height: 50,
-                              radius: 50,
-                              margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                              onTap: () async {
-                                if (_formKey.currentState!.validate()) {
-                                  controller.loginUser(context);
-                                }
-                              },
-                            )
+                        text: 'login'.tr,
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleMedium!
+                            .copyWith(color: colors.white),
+                        height: 50,
+                        radius: 50,
+                        margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                        onTap: () async {
+                          if (_formKey.currentState!.validate()) {
+                            controller.loginUser(context);
+                          }
+                        },
+                      )
                           : const Padding(
-                              padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                              child: ButtonLoader(
-                                radius: 50,
-                                height: 45,
-                              ),
-                            ),
+                        padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                        child: ButtonLoader(
+                          radius: 50,
+                          height: 45,
+                        ),
+                      ),
                       const SizedBox(height: 10),
                       // Row(
                       //   children: <Widget>[

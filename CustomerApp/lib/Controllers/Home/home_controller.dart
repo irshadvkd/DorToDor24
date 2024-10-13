@@ -31,7 +31,7 @@ class HomeController extends GetxController {
       "id": 1,
       "title": "New Year Offer",
       "desc":
-          "Here is the exciting deals for this new year. dorTodor24 wishing you a Happy New Year.",
+      "Here is the exciting deals for this new year. dorTodor24 wishing you a Happy New Year.",
       "date": "25 Dec 2023 10:15 AM",
     }
   ];
@@ -57,17 +57,17 @@ class HomeController extends GetxController {
   Future getHome(context) async {
     isNetworkAvail = await isNetworkAvailable();
     // if (isNetworkAvail) {
-      homeLoader = false;
-      update();
-      var response = await getAPI(context, "home/user?userId=1");
-      if (response['status'] == true) {
-        homeModal = HomeModal.fromJson(response['body']);
-        language = english;
-        addSliderToList();
-        addCategoryToList();
-        addCartToList();
-      }
-      homeLoader = true;
+    homeLoader = false;
+    update();
+    var response = await getAPI(context, "home/user?userId=1");
+    if (response['status'] == true) {
+      homeModal = HomeModal.fromJson(response['body']);
+      language = english;
+      addSliderToList();
+      addCategoryToList();
+      addCartToList();
+    }
+    homeLoader = true;
     // }
     update();
   }
@@ -76,19 +76,19 @@ class HomeController extends GetxController {
   Future getLocation(context) async {
     isNetworkAvail = await isNetworkAvailable();
     // if (isNetworkAvail) {
-      // homeLoader = false;
-      // update();
-      var response = await getAPI(context, "location/get");
-      if (response['status'] == true) {
-        locationModal = LocationModal.fromJson(response['body']);
-        governorate.clear();
-        for (var item in locationModal!.governorate ?? []) {
-          governorate.add({
-            "id": item.id.toString(),
-            "nameEng": item.nameEng,
-            "nameAr": item.nameAr,
-          });
-        }
+    // homeLoader = false;
+    // update();
+    var response = await getAPI(context, "location/get");
+    if (response['status'] == true) {
+      locationModal = LocationModal.fromJson(response['body']);
+      governorate.clear();
+      for (var item in locationModal!.governorate ?? []) {
+        governorate.add({
+          "id": item.id.toString(),
+          "nameEng": item.nameEng,
+          "nameAr": item.nameAr,
+        });
+      }
       // }
       // homeLoader = true;
     }
