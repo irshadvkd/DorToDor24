@@ -3,6 +3,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:dorTodor24/Controllers/Home/home_controller.dart';
+import 'package:dorTodor24/Controllers/Menu/order_controller.dart';
 import 'package:dorTodor24/Controllers/Product/product_controller.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -184,6 +185,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Future<void> navigationPage() async {
     final homeController = Get.put(HomeController());
     Get.put(ProductController());
+    Get.put(OrderController());
     bool isLogin = false;
     SharedPreferences prefs = await SharedPreferences.getInstance();
     if (prefs.getBool('isLogin') != null) {
@@ -200,7 +202,7 @@ class _SplashScreenState extends State<SplashScreen> {
       // Get.offAndToNamed('/home');
       // setupInteractedMessage();
     } else {
-      homeController.getHome(context);
+      // homeController.getHome(context);
       Get.offAndToNamed('/language');
       // Get.offAndToNamed('/login');
     }
