@@ -50,6 +50,13 @@ class HomeController extends GetxController {
     "flag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
   };
 
+
+  @override
+  void onInit() {
+    super.onInit();
+    loadUserDetails(); // Load the user details when the controller is initialized
+  }
+
   Future loginUser(context) async {
     buttonLoader = false;
     update();
@@ -76,6 +83,29 @@ class HomeController extends GetxController {
     }
     buttonLoader = true;
     update();
+  }
+
+  Future<void> loadUserDetails() async {
+    var userDetails = await getUserDetails();
+    name.text = userDetails['name'] ?? '';
+    email.text = userDetails['email'] ?? '';
+    phone.text = userDetails['phone'] ?? '';
+    update(); // Notify the UI that the data has been updated
+  }
+
+  Future<Map<String, String>> getUserDetails() async {
+    final prefs = await SharedPreferences.getInstance();
+    String? userId = prefs.getString("userId");
+    String? userName = prefs.getString("userName");
+    String? userEmail = prefs.getString("userEmail");
+    String? userPhone = prefs.getString("userPhone");
+
+    return {
+      'id': userId ?? '',
+      'name': userName ?? '',
+      'email': userEmail ?? '',
+      'phone': userPhone ?? '',
+    };
   }
 
   Future registerUser(context) async {

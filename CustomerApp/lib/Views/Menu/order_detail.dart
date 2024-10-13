@@ -17,7 +17,7 @@ class OrderDetailsPage extends GetView<OrderController> {
       builder: (controller) {
         // Display a loading indicator while fetching order details
         if (controller.detailsLoader) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         }
         // Get the first order detail if available
         final orderData = controller.detailsData.isNotEmpty
@@ -41,7 +41,7 @@ class OrderDetailsPage extends GetView<OrderController> {
               children: [
                 if (orderData != null) ...[
                   Text(
-                    'Order #${orderData.id}',
+                    'Order ${orderData.id}',
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   const SizedBox(height: 16),
@@ -157,7 +157,7 @@ class OrderDetailsPage extends GetView<OrderController> {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(8),
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(
             color: Colors.black12,
             blurRadius: 4,
@@ -172,10 +172,10 @@ class OrderDetailsPage extends GetView<OrderController> {
             borderRadius: BorderRadius.circular(8),
             child: Image.network(
               imageUrl,
-              width: 50,
+              width: 100,
               height: 50,
               fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) => Icon(Icons.error), // Fallback icon
+              errorBuilder: (context, error, stackTrace) => const Icon(Icons.error), // Fallback icon
             ),
           ),
           const SizedBox(width: 12), // Space between image and text

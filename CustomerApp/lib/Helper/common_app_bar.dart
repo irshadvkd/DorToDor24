@@ -11,10 +11,14 @@ class CommonAppBar extends StatelessWidget {
   final String title;
   final bool? actionEnable;
   final Widget child;
+  final bool? appBarColor;
+  final Color? BarColor;
   const CommonAppBar({
     Key? key,
     required this.title,
     this.actionEnable,
+    this.appBarColor,
+    this.BarColor,
     required this.child,
   }) : super(key: key);
   @override
@@ -22,6 +26,7 @@ class CommonAppBar extends StatelessWidget {
     var cartController = Get.put(CartController());
     return GetBuilder<HomeController>(
       builder: (controller) {
+        bool useAppBarColor = appBarColor ?? false;
         return Scaffold(
           backgroundColor: colors.white,
           appBar: AppBar(
@@ -30,10 +35,10 @@ class CommonAppBar extends StatelessWidget {
               onTap: () {
                 Get.back();
               },
-              child: const Icon(
+              child: Icon(
                 Icons.arrow_back_ios,
                 size: 17,
-                color: colors.textMain,
+                color: useAppBarColor ? colors.white : colors.textMain,
               ),
             ),
             centerTitle: true,
@@ -42,7 +47,7 @@ class CommonAppBar extends StatelessWidget {
               style: Theme.of(context)
                   .textTheme
                   .titleSmall!
-                  .copyWith(color: colors.textMain),
+                  .copyWith(color: useAppBarColor ? colors.white : colors.textMain),
             ),
             actions: actionEnable != false
                 ? [
@@ -86,7 +91,7 @@ class CommonAppBar extends StatelessWidget {
                     ),
                   ]
                 : null,
-            backgroundColor: colors.white,
+            backgroundColor: BarColor ?? colors.white,
           ),
           body: child,
         );
