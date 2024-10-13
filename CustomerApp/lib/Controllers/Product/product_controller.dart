@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dorTodor24/Controllers/Cart/cart_controller.dart';
 import 'package:dorTodor24/Controllers/Home/home_controller.dart';
+import 'package:dorTodor24/Controllers/Menu/order_controller.dart';
 import 'package:dorTodor24/Helper/common_alert.dart';
 import 'package:dorTodor24/Helper/session.dart';
 import 'package:dorTodor24/Helper/string.dart';
@@ -11,6 +12,7 @@ import 'package:dorTodor24/Modals/Product/sub_category_modal.dart';
 import 'package:dorTodor24/Views/Billing/order_success_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProductController extends GetxController {
   TextEditingController searchInSubCategory = TextEditingController();
@@ -92,10 +94,11 @@ class ProductController extends GetxController {
     // if (isNetworkAvail) {
     productLoader = false;
     update();
-
+    var prefs = await SharedPreferences.getInstance();
+    var userId = prefs.getString("userId");
     var response = await getAPI(
       context,
-      "product/getBySubCat?subCatId=$subCategoryId&userId=1",
+      "product/getBySubCat?subCatId=$subCategoryId&userId=$userId",
     );
     if (response['status'] == true) {
       productModal = ProductModal.fromJson(response['body']);
@@ -299,7 +302,8 @@ class ProductController extends GetxController {
     // if (isNetworkAvail) {
     orderLoader = false;
     update();
-    var userId = "1";
+    var prefs = await SharedPreferences.getInstance();
+    var userId = prefs.getString("userId");
     var data = {
       "userId": userId,
       "storeId": storeId,
@@ -358,10 +362,12 @@ class ProductController extends GetxController {
       // );
       final cartController = Get.put(CartController());
       cartController.clearCart();
-
+      final orderController = Get.put(OrderController());
+      orderController.getOrder(context);
       showModalBottomSheet(
         context: context,
         isScrollControlled: true,
+        isDismissible: false,
         backgroundColor: Colors.transparent,
         builder: (context) => Container(
           height: 400,

@@ -1,3 +1,4 @@
+import 'package:dorTodor24/Controllers/Home/home_controller.dart';
 import 'package:dorTodor24/Helper/colors.dart';
 import 'package:dorTodor24/Views/Home/home_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -80,27 +81,29 @@ class _OrderSuccessPopupState extends State<OrderSuccessPopup>
                     .titleSmall!
                     .copyWith(color: colors.white, fontWeight: FontWeight.w600),
                 onTap: () {
+                  final homeController = Get.put(HomeController());
+                  homeController.currentPage = 0;
                   Get.offAllNamed("/home");
                 },
               ),
-              const SizedBox(height: 20),
-              GestureDetector(
-                onTap: () {
-                  Get.to(const OrdersPage());
-                },
-                child: Text(
-                  'View order detail',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyMedium!
-                      .copyWith(fontWeight: FontWeight.bold),
-                ),
-              ),
+              // const SizedBox(height: 20),
+              // GestureDetector(
+              //   onTap: () {
+              //     Get.to(const OrdersPage());
+              //   },
+              //   child: Text(
+              //     'View order detail',
+              //     style: Theme.of(context)
+              //         .textTheme
+              //         .bodyMedium!
+              //         .copyWith(fontWeight: FontWeight.bold),
+              //   ),
+              // ),
             ],
           ),
         ),
         Positioned(
-          top: 20,
+          top: 60,
           left: 0,
           right: 0,
           child: Center(

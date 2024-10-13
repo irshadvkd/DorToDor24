@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../Helper/session.dart';
 import '../../Modals/Product/order_details_model.dart';
@@ -16,11 +17,12 @@ class OrderController extends GetxController {
   OrderModal? orderModal;
   OrderDetailsModel? orderDetailsModal;
 
-  Future<void> getOrder(BuildContext context, String userId) async {
+  Future<void> getOrder(BuildContext context) async {
     isNetworkAvail = await isNetworkAvailable();
     orderLoader = false;
     update();
-
+    var prefs = await SharedPreferences.getInstance();
+    var userId = prefs.getString("userId");
     var body = jsonEncode({"userId": userId}); // Use the passed userId
     var response = await postAPI(context, 'orders/getByUserId', body);
 

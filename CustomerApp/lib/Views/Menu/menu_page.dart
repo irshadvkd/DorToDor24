@@ -46,7 +46,7 @@ class MenuPage extends GetView<HomeController> {
                   Icons.history,
                   "My Orders",
                   () {
-                    orderController.getOrder(context, '3');
+                    orderController.getOrder(context);
                     Get.to(() => const OrdersPage());
                   },
                 ),
