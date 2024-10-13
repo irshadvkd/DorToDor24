@@ -12,6 +12,7 @@ import 'package:dorTodor24/Helper/language.dart';
 import 'package:dorTodor24/Views/Auth/login_page.dart';
 import 'package:dorTodor24/Views/Auth/splash_screen.dart';
 
+import 'Controllers/Home/user_controller.dart';
 import 'Views/Auth/place_page.dart';
 
 class MyHttpOverrides extends HttpOverrides {
@@ -39,6 +40,7 @@ FirebaseMessaging messaging = FirebaseMessaging.instance;
 void main(context) async {
   WidgetsFlutterBinding.ensureInitialized();
   HttpOverrides.global = MyHttpOverrides();
+  Get.put(UserController());
   await GetStorage.init();
   // await Firebase.initializeApp();
 

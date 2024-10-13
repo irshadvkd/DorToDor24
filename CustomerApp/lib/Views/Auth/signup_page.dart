@@ -113,7 +113,7 @@ class SignUpPage extends GetView<HomeController> {
                       CommonTextField(
                         hintText: 'password'.tr,
                         textCapitalization: TextCapitalization.none,
-                        textController: controller.password,
+                        textController: controller.passWord,
                         obSecureText: true,
                         borderRadius: 50,
                         fillColor: colors.lightWhite,
@@ -136,7 +136,7 @@ class SignUpPage extends GetView<HomeController> {
                       CommonTextField(
                         hintText: 'password'.tr,
                         textCapitalization: TextCapitalization.none,
-                        textController: controller.password,
+                        textController: controller.passWord,
                         obSecureText: true,
                         borderRadius: 50,
                         fillColor: colors.lightWhite,

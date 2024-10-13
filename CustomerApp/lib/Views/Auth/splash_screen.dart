@@ -186,6 +186,17 @@ class _SplashScreenState extends State<SplashScreen> {
     Get.put(ProductController());
     bool isLogin = false;
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
+    await Future.delayed(Duration(seconds: 2));
+    if (isLoggedIn) {
+      // If logged in, navigate to homepage
+      print('-------- Already Logged-In --------');
+      Get.offNamed('/home');
+    } else {
+      // If not logged in, navigate to login page
+      print('-------- No User Logged-In --------');
+      Get.offNamed('/login');
+    }
     if (prefs.getBool('isLogin') != null) {
       isLogin = prefs.getBool('isLogin')!;
     }

@@ -11,8 +11,6 @@ class LoginPage extends GetView<HomeController> {
   LoginPage({Key? key}) : super(key: key);
   final _formKey = GlobalKey<FormState>();
 
-  bool _obscurePassword = true;
-
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
@@ -57,8 +55,8 @@ class LoginPage extends GetView<HomeController> {
                       CommonTextField(
                         hintText: 'password'.tr,
                         textCapitalization: TextCapitalization.none,
-                        textController: controller.password,
-                        obSecureText: _obscurePassword,
+                        textController: controller.passWord,
+                        obSecureText: controller.obscurePassword.value,
                         suffixIcon: IconButton(
                           icon: Icon(
                             controller.obscurePassword.value
@@ -93,7 +91,18 @@ class LoginPage extends GetView<HomeController> {
                               margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                               onTap: () async {
                                 if (_formKey.currentState!.validate()) {
-                                  controller.loginUser(context);
+                                  bool isUserChecked = await controller.login();
+                                  // controller.loginUser(context);
+                                  if (isUserChecked) {
+                                    controller.loginUser(context);
+                                  } else {
+                                    // Handle the case where checkUser() fails, if needed
+                                    Get.snackbar(
+                                      'Error',
+                                      'User check failed. Please try again.',
+                                      snackPosition: SnackPosition.BOTTOM,
+                                    );
+                                  }
                                 }
                               },
                             )
