@@ -1,4 +1,5 @@
 import 'package:dorTodor24/Controllers/Cart/cart_controller.dart';
+import 'package:dorTodor24/Controllers/Home/home_controller.dart';
 import 'package:dorTodor24/Helper/colors.dart';
 import 'package:dorTodor24/Helper/common_alert.dart';
 import 'package:dorTodor24/Helper/common_app_bar.dart';
@@ -82,8 +83,11 @@ class CartPage extends GetView<CartController> {
                     .textTheme
                     .titleSmall!
                     .copyWith(color: colors.white, fontWeight: FontWeight.w600),
-                onTap: () {
+                onTap: () async {
                   if (controller.cartItems.isNotEmpty) {
+                    final homeController = Get.put(HomeController());
+                     homeController.getLocation(context);
+                    homeController.update();
                     Get.to(() => const OrderPage());
                   } else {
                     showDialog(
@@ -273,10 +277,8 @@ class CartPage extends GetView<CartController> {
                           CommonCard(
                             color: colors.primary,
                             onTap: () {
-                              final cartController =
-                              Get.put(CartController());
-                              currentIndex.proQty =
-                                  currentIndex.proQty! + 1;
+                              final cartController = Get.put(CartController());
+                              currentIndex.proQty = currentIndex.proQty! + 1;
                               cartController.addToCart(
                                   context, currentIndex, 0, true);
                               controller.update();

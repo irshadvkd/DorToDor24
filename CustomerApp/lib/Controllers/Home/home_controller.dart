@@ -70,8 +70,8 @@ class HomeController extends GetxController {
       prefs.setString("userName", loginModal.user!.name.toString());
       prefs.setString("userEmail", loginModal.user!.email.toString());
       prefs.setString("userPhone", loginModal.user!.phone.toString());
-      Get.offAndToNamed('/home');
-      getHome(context);
+      Get.offAndToNamed('/place');
+      getLocation(context);
       currentPage = 0;
     }
     buttonLoader = true;
@@ -100,8 +100,8 @@ class HomeController extends GetxController {
       prefs.setString("userName", loginModal.user!.name.toString());
       prefs.setString("userEmail", loginModal.user!.email.toString());
       prefs.setString("userPhone", loginModal.user!.phone.toString());
-      Get.offAndToNamed('/home');
-      getHome(context);
+      Get.offAndToNamed('/place');
+      getLocation(context);
       currentPage = 0;
     }
     buttonLoader = true;
@@ -146,6 +146,18 @@ class HomeController extends GetxController {
           "nameAr": item.nameAr,
         });
       }
+      bool isSelectLocation = false;
+      var prefs = await SharedPreferences.getInstance();
+      if (prefs.getBool('isSelectLocation') != null) {
+        isSelectLocation = prefs.getBool('isSelectLocation')!;
+      }
+      if (isSelectLocation == true) {
+        selectedGovernorate = prefs.getString("governorate") ?? "";
+        await addCityToList();
+        selectedCity = prefs.getString("city") ?? "";
+        await addBlockToList();
+        selectedBlock = prefs.getString("block") ?? "";
+      }
       // }
       // homeLoader = true;
     }
@@ -154,6 +166,9 @@ class HomeController extends GetxController {
 
   addCityToList() {
     city.clear();
+    block.clear();
+    selectedCity = "";
+    selectedBlock = "";
     for (var item in locationModal!.city ?? []) {
       if (item.govId.toString() == selectedGovernorate) {
         city.add({
@@ -168,6 +183,7 @@ class HomeController extends GetxController {
 
   addBlockToList() {
     block.clear();
+    selectedBlock = "";
     for (var item in locationModal!.block ?? []) {
       if (item.cityId.toString() == selectedCity) {
         block.add({

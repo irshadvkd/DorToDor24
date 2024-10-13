@@ -51,7 +51,8 @@ class _HomeAppBarState extends State<HomeAppBar> {
                   color: colors.white,
                 ),
                 onPressed: () {
-                  Get.to(() => const PlaceSelectPage());
+                  controller.getLocation(context);
+                  Get.to(() =>  PlaceSelectPage());
                 },
               ),
               IconButton(

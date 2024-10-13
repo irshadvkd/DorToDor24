@@ -73,6 +73,7 @@ class MenuPage extends GetView<HomeController> {
                   () async {
                     var prefs = await SharedPreferences.getInstance();
                     prefs.setBool("isLogin", false);
+                    prefs.setBool("isSelectLocation", false);
                     Get.offAllNamed("/login");
                   },
                 ),

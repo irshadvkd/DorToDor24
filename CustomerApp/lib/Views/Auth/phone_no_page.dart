@@ -96,7 +96,7 @@ class PhoneNoPage extends GetView<HomeController> {
                 color: colors.themeButton,
                 onTap: () {
                   controller.getLocation(context);
-                  Get.to(() => const PlaceSelectPage());
+                  Get.to(() =>  PlaceSelectPage());
                 },
               ),
               Padding(

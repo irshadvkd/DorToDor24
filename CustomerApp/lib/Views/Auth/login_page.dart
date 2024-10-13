@@ -9,7 +9,7 @@ import 'package:dorTodor24/Helper/common_text_field.dart';
 import 'package:dorTodor24/Helper/session.dart';
 
 class LoginPage extends GetView<HomeController> {
-  LoginPage({Key? key}) : super(key: key);
+  LoginPage({super.key});
   final _formKey = GlobalKey<FormState>();
 
   @override

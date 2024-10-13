@@ -289,10 +289,12 @@ class ProductController extends GetxController {
   //   update();
   // }
 
-  Future confirmOrder(
-    context,
-    storeId,
-  ) async {
+  List<Map<String, dynamic>> get serializedCartItems {
+    final cartController = Get.put(CartController());
+    return cartController.cartItems.map((item) => item.toJson()).toList();
+  }
+
+  Future confirmOrder(context, storeId) async {
     isNetworkAvail = await isNetworkAvailable();
     // if (isNetworkAvail) {
     orderLoader = false;
@@ -305,6 +307,8 @@ class ProductController extends GetxController {
       "address": address.text,
       "contact": contactNumber.text,
       "note": deliveryNote.text,
+      "paymentMethod": paymentMethod,
+      "cartItems": serializedCartItems,
     };
     var response = await postAPI(
       context,
@@ -352,6 +356,9 @@ class ProductController extends GetxController {
       //     );
       //   },
       // );
+      final cartController = Get.put(CartController());
+      cartController.clearCart();
+
       showModalBottomSheet(
         context: context,
         isScrollControlled: true,

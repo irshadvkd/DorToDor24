@@ -95,7 +95,7 @@ class CommonDropDown extends StatelessWidget {
           ),
           errorStyle: Theme.of(context)
               .textTheme
-              .titleLarge!
+              .headlineSmall!
               .copyWith(color: Colors.red, fontWeight: FontWeight.w400),
         ),
         validator: (value) {

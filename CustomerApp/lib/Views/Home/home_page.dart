@@ -24,87 +24,91 @@ class HomePage extends GetView<HomeController> {
           onRefresh: () async {
             controller.getHome(context);
           },
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(24, 16, 24, 10),
+          child: controller.homeLoader
+              ? SingleChildScrollView(
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        "Let's find food here",
-                        style: Theme.of(context)
-                            .textTheme
-                            .headlineLarge!
-                            .copyWith(color: colors.themeButton, fontSize: 24),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(24, 16, 24, 10),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Let's find food here",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headlineLarge!
+                                  .copyWith(
+                                      color: colors.themeButton, fontSize: 24),
+                            ),
+                            // const SizedBox(height: 8),
+                            // CommonTextField(
+                            //   hintText: "Search now....",
+                            //   textController: productController.searchInCategory,
+                            //   prefixIcon: const Icon(
+                            //     Icons.search,
+                            //     size: 24,
+                            //   ),
+                            //   onChange: (value) {
+                            //     // final productController =
+                            //     //     Get.put(ProductController());
+                            //     // // productController.getProduct(context, 0);
+                            //     // Get.to(() => const ProductSearchPage());
+                            //   },
+                            // ),
+                          ],
+                        ),
                       ),
-                      // const SizedBox(height: 8),
-                      // CommonTextField(
-                      //   hintText: "Search now....",
-                      //   textController: productController.searchInCategory,
-                      //   prefixIcon: const Icon(
-                      //     Icons.search,
-                      //     size: 24,
-                      //   ),
-                      //   onChange: (value) {
-                      //     // final productController =
-                      //     //     Get.put(ProductController());
-                      //     // // productController.getProduct(context, 0);
-                      //     // Get.to(() => const ProductSearchPage());
-                      //   },
-                      // ),
+
+                      /// Slider Section UI
+                      CarouselSlider(
+                        options: CarouselOptions(
+                          aspectRatio: 3,
+                          initialPage: 0,
+                          enableInfiniteScroll: true,
+                          reverse: false,
+                          autoPlay: true,
+                          autoPlayInterval: const Duration(seconds: 3),
+                          autoPlayAnimationDuration:
+                              const Duration(milliseconds: 800),
+                          autoPlayCurve: Curves.fastOutSlowIn,
+                          scrollDirection: Axis.horizontal,
+                          viewportFraction: 0.8,
+                          enlargeCenterPage: true,
+                          enlargeStrategy: CenterPageEnlargeStrategy.height,
+                        ),
+                        items: controller.slider.map((item) {
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 6),
+                            child: CommonImage(url: imgUrl + item['image']),
+                          );
+                        }).toList(),
+                      ),
+
+                      ///Category Section UI
+                      Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: GridView.builder(
+                          itemCount: controller.category.length,
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 30,
+                            mainAxisSpacing: 20,
+                          ),
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          padding: const EdgeInsets.all(16),
+                          itemBuilder: (context, index) {
+                            return categoryCard(
+                                context, controller.category[index]);
+                          },
+                        ),
+                      ),
                     ],
                   ),
-                ),
-
-                /// Slider Section UI
-                CarouselSlider(
-                  options: CarouselOptions(
-                    aspectRatio: 3,
-                    initialPage: 0,
-                    enableInfiniteScroll: true,
-                    reverse: false,
-                    autoPlay: true,
-                    autoPlayInterval: const Duration(seconds: 3),
-                    autoPlayAnimationDuration:
-                        const Duration(milliseconds: 800),
-                    autoPlayCurve: Curves.fastOutSlowIn,
-                    scrollDirection: Axis.horizontal,
-                    viewportFraction: 0.8,
-                    enlargeCenterPage: true,
-                    enlargeStrategy: CenterPageEnlargeStrategy.height,
-                  ),
-                  items: controller.slider.map((item) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 6),
-                      child: CommonImage(url: imgUrl + item['image']),
-                    );
-                  }).toList(),
-                ),
-
-                ///Category Section UI
-                Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: GridView.builder(
-                    itemCount: controller.category.length,
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 30,
-                      mainAxisSpacing: 20,
-                    ),
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    padding: const EdgeInsets.all(16),
-                    itemBuilder: (context, index) {
-                      return categoryCard(context, controller.category[index]);
-                    },
-                  ),
-                ),
-              ],
-            ),
-          ),
+                )
+              : const Center(child: CircularProgressIndicator()),
         );
       },
     );
