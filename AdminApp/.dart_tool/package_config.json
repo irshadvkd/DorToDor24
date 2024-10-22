@@ -45,7 +45,7 @@
     },
     {
       "name": "carousel_slider",
-      "rootUri": "file:///Users/mohammedvc/.pub-cache/hosted/pub.dev/carousel_slider-4.2.1",
+      "rootUri": "file:///Users/mohammedvc/.pub-cache/hosted/pub.dev/carousel_slider-5.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -740,7 +740,7 @@
       "languageVersion": "3.5"
     }
   ],
-  "generated": "2024-10-09T18:02:21.628725Z",
+  "generated": "2024-10-20T19:12:10.128750Z",
   "generator": "pub",
   "generatorVersion": "3.5.1",
   "flutterRoot": "file:///Applications/flutter",

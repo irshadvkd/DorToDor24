@@ -54,7 +54,7 @@ dependencies:
   path_provider: ^2.1.1
   permission_handler: ^11.0.1
   in_app_update: ^4.2.2
-  carousel_slider: ^4.2.1
+  carousel_slider: ^5.0.0
   file_picker: ^6.1.1
   image_cropper: ^5.0.1
   image_picker: ^1.0.5
@@ -82,7 +82,7 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
-    - assets/icons
+    - assets/icons/
 
   # To add assets to your application, add an assets section, like this:
   # assets:
