@@ -4,7 +4,7 @@ import 'package:dortodorpartner/Helper/colors.dart';
 import 'package:dortodorpartner/Views/Home/home_page.dart';
 import 'package:dortodorpartner/Views/Home/notification_page.dart';
 import 'package:dortodorpartner/Views/Menu/menu_page.dart';
-import 'package:dortodorpartner/Views/Menu/order_page.dart';
+import 'package:dortodorpartner/Views/Order/order_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -64,10 +64,10 @@ class HomeAppBar extends GetView<HomeController> {
         } else if (index == 1) {
           OrderController orderController = Get.put(OrderController());
           if (prefs.getString('privilege') == '1') {
-            orderController.getAllOrders(context);
+            orderController.getAllOrdersAdmin(context);
           } else if (prefs.getString('privilege') == '2') {
             var storeId = prefs.getString("userId");
-            orderController.getStoreOrders(context, storeId);
+            orderController.getAllOrdersStore(context, storeId);
           }
         }
         controller.currentPage = index;

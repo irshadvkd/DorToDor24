@@ -20,7 +20,8 @@ class CommonAppBar extends StatelessWidget {
         return Scaffold(
           backgroundColor: colors.white,
           appBar: AppBar(elevation: 0,
-            leading: InkWell(
+            leading: actionEnable != false
+                ? InkWell(
               onTap: () {
                 Get.back();
               },
@@ -29,7 +30,8 @@ class CommonAppBar extends StatelessWidget {
                 size: 17,
                 color: colors.textMain,
               ),
-            ),
+            )
+            : const SizedBox(),
             centerTitle: true,
             title: Text(
               title,
