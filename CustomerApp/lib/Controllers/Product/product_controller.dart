@@ -102,6 +102,10 @@ class ProductController extends GetxController {
     );
     if (response['status'] == true) {
       productModal = ProductModal.fromJson(response['body']);
+      print("----DANISH----GetProduct");
+      print("--------------------------");
+      print(jsonEncode(productModal?.toJson()));
+      print("--------------------------");
       addProductToList();
     }
     productLoader = true;

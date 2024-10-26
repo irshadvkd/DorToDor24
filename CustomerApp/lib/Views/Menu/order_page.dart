@@ -17,28 +17,26 @@ class OrdersPage extends GetView<OrderController> {
         return CommonAppBar(
           title: 'My Orders',
           actionEnable: false,
-          child: Expanded(
-            child: controller.order.isEmpty
-                ? const Center(child: Text('No orders found.'))
-                : ListView.builder(
-              itemCount: controller.order.length,
-              itemBuilder: (context, index) {
-                var currentOrder = controller.order[index];
+          child: controller.order.isEmpty
+              ? const Center(child: Text('No orders found.'))
+              : ListView.builder(
+            itemCount: controller.order.length,
+            itemBuilder: (context, index) {
+              var currentOrder = controller.order[index];
 
-                return orderItemCard(
-                  context,
-                  'Order ${currentOrder.id ?? 'N/A'}',
-                  currentOrder.createdAt ?? 'N/A',
-                  getOrderStatus(currentOrder.status ?? -1), // Default to -1 if null
-                  currentOrder.amount ?? '0', // Default to '0' if null
-                      () {
-                    debugPrint('Tapped on Order #${currentOrder.id}');
-                    controller.orderDetails(context, '${currentOrder.id}');
-                    Get.to(() => const OrderDetailsPage());
-                  },
-                );
-              },
-            ),
+              return orderItemCard(
+                context,
+                'Order ${currentOrder.id ?? 'N/A'}',
+                currentOrder.createdAt ?? 'N/A',
+                getOrderStatus(currentOrder.status ?? -1), // Default to -1 if null
+                currentOrder.amount ?? '0', // Default to '0' if null
+                    () {
+                  debugPrint('Tapped on Order #${currentOrder.id}');
+                  controller.orderDetails(context, '${currentOrder.id}');
+                  Get.to(() => OrderDetailsPage());
+                },
+              );
+            },
           ),
         );
       },

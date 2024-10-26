@@ -53,8 +53,20 @@ class OrderController extends GetxController {
       print('------ Order Details fetch Success ------');
       orderDetailsModal = OrderDetailsModel.fromJson(response['body']);
       detailsData = [orderDetailsModal!.data!];
+      print("----DANISH----OrderDetails");
+      print("--------------------------");
+      print(jsonEncode(orderDetailsModal?.toJson()));
+      print("--------------------------");
       detailsProducts = orderDetailsModal!.products!;
+      // Log to confirm product image URLs
+      // detailsProducts.forEach((product) {
+      //   print('Product Image URL: ${product.image}');
+      // });
       // addOrderToList();
+      print("----detailsProducts-------");
+      print("--------------------------");
+      print(detailsProducts);
+      print("--------------------------");
     } else {
       // Handle the case where the response is not successful
       orderDetailsModal = null; // Resetting to null
@@ -64,4 +76,14 @@ class OrderController extends GetxController {
     detailsLoader = false;
     update();
   }
+
+  List<Map<String, dynamic>> get mappedOrderDetailsProducts {
+    return detailsProducts.map((product) => product.toJson()).toList();
+  }
+
+  var isExpanded = false.obs;
+  void toggleExpansion() {
+    isExpanded.value = !isExpanded.value;
+  }
+
 }
