@@ -22,7 +22,6 @@ class HomeAppBar extends GetView<HomeController> {
             backgroundColor: colors.primary,
             leading: Image.asset(
               "assets/icons/logo.png",
-              color: Colors.white,
             ),
             title: Text(
               'DOR 2 DOR',

@@ -18,12 +18,12 @@ class OrdersPage extends GetView<OrderController> {
         return CommonAppBar(
           title: 'Orders',
           actionEnable: false,
-          child: controller.orders.isEmpty
+          child: controller.order.isEmpty
               ? const Center(child: Text('No orders found.'))
               : ListView.builder(
-            itemCount: controller.orders.length,
+            itemCount: controller.order.length,
             itemBuilder: (context, index) {
-              var currentOrder = controller.orders[index];
+              var currentOrder = controller.order[index];
 
               return orderItemCard(
                 context,
@@ -70,7 +70,6 @@ class OrdersPage extends GetView<OrderController> {
       String amount,
       VoidCallback onTap,
       ) {
-    // Parse and format the date
     DateTime parsedDate = DateTime.tryParse(date) ?? DateTime.now();
     String formattedDate =
     DateFormat('MMM d, yyyy').format(parsedDate); // e.g., "Oct 26, 2024"

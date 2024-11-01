@@ -1,22 +1,23 @@
+import 'package:dortodorpartner/Helper/string.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../Controllers/Order/order_controller.dart';
 import '../../Helper/colors.dart';
 import '../../Helper/common_app_bar.dart';
+import '../../Helper/common_image.dart';
 import 'order_item_card.dart';
 
 class OrderDetailsPage extends GetView<OrderController> {
   OrderDetailsPage({super.key});
 
   final ScrollController _scrollController = ScrollController();
-  final String currencyCode = 'KWD'; // Define the currency code here
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<OrderController>(
       init: OrderController(),
       builder: (controller) {
-        if (controller.orderDetailLoader) {
+        if (controller.orderLoader) {
           return const Center(child: CircularProgressIndicator());
         }
 
@@ -24,11 +25,9 @@ class OrderDetailsPage extends GetView<OrderController> {
             ? controller.detailsData[0]
             : null;
         final totalAmount = controller.detailsProducts.fold<double>(
-          0,
-              (sum, product) => sum +
-              (double.tryParse(product.proPrice ?? '0')! *
-                  (product.proQty ?? 0)),
-        );
+            0,
+                (sum, product) =>
+            sum + (double.tryParse(product.proPrice ?? '0')! * (product.proQty ?? 0)));
 
         return CommonAppBar(
           title: 'Order Details',
@@ -39,20 +38,13 @@ class OrderDetailsPage extends GetView<OrderController> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 if (orderData != null) ...[
-                  Text('Order ${orderData.id}',
-                      style: Theme.of(context).textTheme.titleLarge),
+                  Text('Order ${orderData.id}', style: Theme.of(context).textTheme.titleLarge),
                   const SizedBox(height: 16),
                   Row(
                     children: [
-                      Text("Date: ",
-                          style: Theme.of(context).textTheme.headlineSmall),
+                      Text("Date: ", style: Theme.of(context).textTheme.headlineSmall),
                       Text(
-                        // Convert createdAt to DateTime and format it
-                        DateTime.tryParse(orderData.createdAt ?? '')
-                            ?.toLocal()
-                            .toString()
-                            .split(' ')[0] ??
-                            'N/A',
+                        "${orderData.createdAt?.toLocal().toString().split(' ')[0]} ${orderData.createdAt?.hour}:${orderData.createdAt?.minute}",
                         style: Theme.of(context).textTheme.headlineMedium,
                       ),
                     ],
@@ -60,10 +52,9 @@ class OrderDetailsPage extends GetView<OrderController> {
                   const SizedBox(height: 8),
                   Row(
                     children: [
-                      Text("Total: ",
-                          style: Theme.of(context).textTheme.headlineSmall),
+                      Text("Total: ", style: Theme.of(context).textTheme.headlineSmall),
                       Text(
-                        "${orderData.amount} $currencyCode",
+                        "${orderData.amount} $currencyCodeEng",
                         style: Theme.of(context).textTheme.headlineMedium,
                       ),
                     ],
@@ -71,8 +62,7 @@ class OrderDetailsPage extends GetView<OrderController> {
                   const SizedBox(height: 8),
                   Row(
                     children: [
-                      Text("Status: ",
-                          style: Theme.of(context).textTheme.headlineSmall),
+                      Text("Status: ", style: Theme.of(context).textTheme.headlineSmall),
                       Text(
                         getOrderStatus(orderData.status!),
                         style: Theme.of(context).textTheme.headlineMedium,
@@ -118,36 +108,37 @@ class OrderDetailsPage extends GetView<OrderController> {
                   const SizedBox(height: 22),
                   Row(
                     children: [
-                      Text('Total Amount : ',
-                          style: Theme.of(context).textTheme.titleSmall),
+                      Text('Total Amount : ', style: Theme.of(context).textTheme.titleSmall),
                       Text(
-                        '${totalAmount.toStringAsFixed(3)} $currencyCode',
+                        '${totalAmount.toStringAsFixed(3)} $currencyCodeEng',
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                     ],
                   ),
                   const SizedBox(height: 22),
 
-                  GestureDetector(
-                    onTap: controller.toggleExpansion,
-                    child: Row(
-                      children: [
-                        Text('Shipping Address',
-                            style: Theme.of(context).textTheme.titleLarge),
-                        const SizedBox(width: 8),
-                        Obx(() => Icon(
-                          controller.isExpanded.value
-                              ? Icons.arrow_drop_up
-                              : Icons.arrow_drop_down,
-                          color: Colors.black54,
-                        )),
-                      ],
-                    ),
-                  ),
+                  // Container(
+                  //   height: 200,
+                  //   width: 200,
+                  //   color: colors.spText,
+                  //   padding: const EdgeInsets.all(20.0),
+                  //   child: Container(
+                  //     color: colors.hintText,
+                  //     child: AspectRatio(
+                  //       aspectRatio: 5 / 3,
+                  //       child: CommonImage(
+                  //         url: "https://dorTodor24.com/api/public/product/8OS4MbnqdeLKGmfCAbjECWtNKW9mX6.png",
+                  //         fit: BoxFit.contain,
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
+                  // const SizedBox(height: 22),
 
-                  Obx(() {
-                    return controller.isExpanded.value
-                        ? Column(
+                  // Use Obx to reactively listen to isExpanded changes
+                  Text('Shipping Address', style: Theme.of(context).textTheme.titleLarge),
+                  const SizedBox(width: 8),
+                  Column(
                       children: [
                         const SizedBox(height: 8),
                         Container(
@@ -198,9 +189,7 @@ class OrderDetailsPage extends GetView<OrderController> {
                           ),
                         ),
                       ],
-                    )
-                        : const SizedBox.shrink();
-                  }),
+                    ),
                 ],
               ],
             ),

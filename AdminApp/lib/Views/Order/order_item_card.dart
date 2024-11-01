@@ -21,12 +21,6 @@ class OrderItemCard extends GetView<OrderController> {
 
   @override
   Widget build(BuildContext context) {
-    const String baseUrl = "https://dorTodor24.com/api";
-    // final String imageUrl = "$baseUrl${product.image}";
-    // final String? imageUrl = product.image;
-    // final String name = product.nameEng ?? 'Unknown Product';
-    // final int quantity = product.proQty ?? 0;
-    // final double price = double.tryParse(product.proPrice ?? '0') ?? 0.0;
 
     final String imageUrl = "https://dorTodor24.com/api${currentIndex['image']}";
     final String name = currentIndex['nameEng'] ?? 'Unknown Product';
@@ -100,13 +94,13 @@ class OrderItemCard extends GetView<OrderController> {
                   ],
                 ),
               ),
-              // Text(
-              //   '${(quantity * price).toStringAsFixed(2)} $currencyCode',
-              //   style: Theme.of(context).textTheme.titleLarge!.copyWith(
-              //     fontWeight: FontWeight.bold,
-              //     fontSize: 16,
-              //   ),
-              // ),
+              Text(
+                '${(quantity * price).toStringAsFixed(2)} $currencyCodeEng',
+                style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                ),
+              ),
             ],
           ),
         );

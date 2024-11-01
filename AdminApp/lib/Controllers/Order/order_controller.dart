@@ -2,21 +2,24 @@ import 'dart:convert';
 
 import 'package:dortodorpartner/Helper/session.dart';
 import 'package:dortodorpartner/Modals/Order/order_detail_modal.dart';
+import 'package:dortodorpartner/Modals/Order/admin_order_modal.dart';
 import 'package:dortodorpartner/Modals/Order/order_modal.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class OrderController extends GetxController {
   bool isNetworkAvail = true;
-  bool buttonLoader = true;
   bool orderLoader = true;
   bool orderDetailLoader = true;
-
-  List<OrderModal> orderModal = [];
-  List<OrderModal> orders = []; // Now using List of OrderModal
+  List<Order> order = [];
   List<Data> detailsData = [];
-  List<Products> detailsProducts = [];
+  List<Product> detailsProducts = [];
+  OrderModal? orderModal;
+  OrderDetailsModel? orderDetailsModal;
 
+
+  AdminOrderModal? adminOrderModal;
+  List<AdminOrderModal> adminOrder = [];
   Future getAllOrdersAdmin(context) async {
     isNetworkAvail = await isNetworkAvailable();
     orderLoader = false;
@@ -24,8 +27,8 @@ class OrderController extends GetxController {
     var response = await getAPI(context, "orders/get");
     if (response['status'] == true) {
       print('------Admin View Order fetch Success ------');
-      orderModal = orderModalFromJson(response['data']);
-      addOrderToList();
+      adminOrderModal = AdminOrderModal.fromJson(response['body']);
+      adminOrder = [adminOrderModal!];
     }
     orderLoader = true;
     update();
@@ -39,50 +42,48 @@ class OrderController extends GetxController {
     await postAPI(context, "orders/getByStoreId", jsonEncode({"storeId": storeId}));
     if (response['status'] == true) {
       print('------Store View Order fetch Success ------');
-      orderModal = orderModalFromJson(response['data']);
-      addOrderToList();
+      // orderModal = orderModalFromJson(response['data']);
     }
     orderLoader = true;
     update();
   }
 
-  // Add OrderModal instances directly to the orders list
-  addOrderToList() {
-    orders.clear();
-    orders.addAll(orderModal); // Directly add OrderModal instances
-    update();
-  }
-
-  OrderDetailModal? orderDetailModal;
-  Future<void> getOrderDetailUser(BuildContext context, orderId) async {
+  Future<void> getOrderDetailUser(BuildContext context, String orderId) async {
     isNetworkAvail = await isNetworkAvailable();
-    orderDetailLoader = false;
+    orderDetailLoader = true;
     update();
 
     var body = jsonEncode({"orderId": orderId});
-    var response = await postAPI(context, "orders/getDetail", body);
+    var response = await postAPI(context, 'orders/getDetail', body);
 
     if (response['status'] == true) {
       print('------ Customer Order Details fetch Success ------');
-      orderDetailModal = OrderDetailModal.fromJson(jsonDecode(response['data']));
-      detailsData = [orderDetailModal!.data!];
-      detailsProducts = orderDetailModal!.products!;
+      orderDetailsModal = OrderDetailsModel.fromJson(response['body']);
+      detailsData = [orderDetailsModal!.data!];
+      print("--------------------------");
+      print(jsonEncode(orderDetailsModal?.toJson()));
+      print("--------------------------");
+      detailsProducts = orderDetailsModal!.products!;
+      // Log to confirm product image URLs
+      // detailsProducts.forEach((product) {
+      //   print('Product Image URL: ${product.image}');
+      // });
+      // addOrderToList();
+      print("----detailsProducts-------");
+      print("--------------------------");
+      print(detailsProducts);
+      print("--------------------------");
     } else {
-      orderDetailModal = null; // Resetting to null if fetch fails
+      // Handle the case where the response is not successful
+      orderDetailsModal = null; // Resetting to null
       print('Failed to fetch orders: ${response['status']}');
     }
 
-    orderDetailLoader = true;
+    orderDetailLoader = false;
     update();
   }
 
   List<Map<String, dynamic>> get mappedOrderDetailsProducts {
     return detailsProducts.map((product) => product.toJson()).toList();
   }
-
-  var isExpanded = false.obs;
-  void toggleExpansion() {
-    isExpanded.value = !isExpanded.value;
-  }
-
 }
