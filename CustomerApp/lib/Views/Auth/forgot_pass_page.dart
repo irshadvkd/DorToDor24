@@ -8,7 +8,7 @@ import 'package:dorTodor24/Helper/common_text_field.dart';
 import 'package:dorTodor24/Helper/session.dart';
 
 class ForgotPassPage extends GetView<HomeController> {
-  ForgotPassPage({Key? key}) : super(key: key);
+  ForgotPassPage({super.key});
   final _formKey = GlobalKey<FormState>();
 
   @override

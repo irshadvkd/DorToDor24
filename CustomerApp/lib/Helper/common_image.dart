@@ -8,8 +8,7 @@ class CommonImage extends StatelessWidget {
   final BoxFit? fit;
   final double? radius;
   const CommonImage(
-      {Key? key, required this.url, this.width, this.height, this.fit,this.radius})
-      : super(key: key);
+      {super.key, required this.url, this.width, this.height, this.fit,this.radius});
 
   @override
   Widget build(BuildContext context) {

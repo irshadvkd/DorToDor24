@@ -4,7 +4,7 @@ import 'package:dorTodor24/Helper/colors.dart';
 
 class CommonCard extends GetView {
   const CommonCard({
-    Key? key,
+    super.key,
     this.width,
     this.height,
     required this.child,
@@ -14,7 +14,7 @@ class CommonCard extends GetView {
     this.padding,
     this.color,
     this.boxShadowEnable,
-  }) : super(key: key);
+  });
   final double? height;
   final double? width;
   final Function()? onTap;

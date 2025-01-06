@@ -1,11 +1,9 @@
 import 'package:dorTodor24/Controllers/Home/home_controller.dart';
 import 'package:dorTodor24/Helper/colors.dart';
-import 'package:dorTodor24/Views/Home/home_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../Helper/common_button.dart';
-import '../Menu/order_page.dart';
 
 class OrderSuccessPopup extends StatefulWidget {
   const OrderSuccessPopup({super.key});

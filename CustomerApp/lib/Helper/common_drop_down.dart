@@ -14,7 +14,7 @@ class CommonDropDown extends StatelessWidget {
   final Color? textColor;
   final double? thickness;
   const CommonDropDown({
-    Key? key,
+    super.key,
     required this.hintText,
     required this.list,
     required this.selected,
@@ -24,7 +24,7 @@ class CommonDropDown extends StatelessWidget {
     this.borderColor,
     this.textColor,
     this.thickness,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -131,8 +131,8 @@ class CommonDropDown extends StatelessWidget {
           ),
           scrollbarTheme: ScrollbarThemeData(
             radius: const Radius.circular(40),
-            thickness: MaterialStateProperty.all(6),
-            thumbVisibility: MaterialStateProperty.all(true),
+            thickness: WidgetStateProperty.all(6),
+            thumbVisibility: WidgetStateProperty.all(true),
           ),
         ),
       ),

@@ -31,7 +31,7 @@ class CommonTextField extends GetView {
   final Color? borderColor;
   final List<TextInputFormatter>? inputFormatter;
   const CommonTextField({
-    Key? key,
+    super.key,
     required this.hintText,
     this.labelText,
     this.hintStyle,
@@ -58,7 +58,7 @@ class CommonTextField extends GetView {
     this.obSecureText,
     this.suffixIcon,
     this.inputStyle,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -1,5 +1,4 @@
 import 'package:dorTodor24/Controllers/Cart/cart_controller.dart';
-import 'package:dorTodor24/Controllers/Product/product_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:dorTodor24/Controllers/Home/home_controller.dart';
@@ -14,13 +13,13 @@ class CommonAppBar extends StatelessWidget {
   final bool? appBarColor;
   final Color? BarColor;
   const CommonAppBar({
-    Key? key,
+    super.key,
     required this.title,
     this.actionEnable,
     this.appBarColor,
     this.BarColor,
     required this.child,
-  }) : super(key: key);
+  });
   @override
   Widget build(BuildContext context) {
     var cartController = Get.put(CartController());

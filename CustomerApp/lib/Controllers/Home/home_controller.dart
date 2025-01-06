@@ -22,6 +22,16 @@ class HomeController extends GetxController {
   bool homeLoader = true;
   bool buttonLoader = true;
 
+  var obscureText = true.obs;
+  void togglePasswordVisibility() {
+    obscureText.value = !obscureText.value;
+  }
+
+  var passwordError = false.obs;
+  void togglePasswordError() {
+    passwordError.value = !passwordError.value;
+  }
+
   int currentPage = 0;
 
   List slider = [];
@@ -274,3 +284,4 @@ class HomeController extends GetxController {
     update();
   }
 }
+

@@ -3,9 +3,8 @@ import 'package:dorTodor24/Helper/common_app_bar.dart';
 import 'package:dorTodor24/Helper/string.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import '../../Controllers/Menu/order_controller.dart';
-import '../../Helper/common_image.dart';
-import '../../Modals/Product/order_details_model.dart';
 
 class OrderDetailsPage extends GetView<OrderController> {
   const OrderDetailsPage({super.key});
@@ -31,6 +30,18 @@ class OrderDetailsPage extends GetView<OrderController> {
                 (double.tryParse(product.proPrice ?? '0')! *
                     (product.proQty ?? 0)));
 
+        // Parse the value to a DateTime object
+        DateTime parsedDate = DateTime.parse(orderData!.createdAt.toString().replaceAll(' ', 'T'));
+
+        // Extract and format the date in DD-MM-YY format
+        String date = DateFormat('dd-MM-yyyy').format(parsedDate);
+
+        // Extract and format the time in 12-hour format
+        String time = DateFormat('hh:mm aa').format(parsedDate);
+
+        print('Date: $date'); // Output: Date: 02-01-25
+        print('Time: $time'); // Output: Time: 04:49 PM
+
         return CommonAppBar(
           title: 'Order Detail',
           actionEnable: false,
@@ -39,92 +50,93 @@ class OrderDetailsPage extends GetView<OrderController> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                if (orderData != null) ...[
-                  Text(
-                    'Order ${orderData.id}',
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                  const SizedBox(height: 16),
-                  Row(
-                    children: [
-                      Text(
-                        "Date: ",
-                        style: Theme.of(context).textTheme.headlineSmall,
-                      ),
-                      Text(
-                        "${orderData.createdAt?.toLocal().toString().split(' ')[0]} ${orderData.createdAt?.hour}:${orderData.createdAt?.minute}",
-                        style: Theme.of(context).textTheme.headlineMedium,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 8),
-                  Row(
-                    children: [
-                      Text(
-                        "Total: ",
-                        style: Theme.of(context).textTheme.headlineSmall,
-                      ),
-                      Text(
-                        "${orderData.amount} $currencyCode",
-                        style: Theme.of(context).textTheme.headlineMedium,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 8),
-                  Row(
-                    children: [
-                      Text(
-                        "Status: ",
-                        style: Theme.of(context).textTheme.headlineSmall,
-                      ),
-                      Text(
-                        getOrderStatus(orderData.status!),
-                        style: Theme.of(context).textTheme.headlineMedium,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 16),
-                  Text(
-                    'Items',
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                  // Display each product in the order
-                  ...controller.detailsProducts.map((product) {
-                    return orderItemCard(
-                      context,
-                      product.nameEng ?? 'Unknown',      // Product name
-                      product.proQty ?? 0,               // Quantity
-                      double.tryParse(product.proPrice ?? '0') ?? 0,  // Price
-                      product.image ?? '',               // Image URL
-                    );
-                  }).toList(),
-                  const SizedBox(height: 16),
-                  Row(
-                    children: [
-                      Text(
-                        'Total Amount: ',
-                        style: Theme.of(context).textTheme.titleSmall,
-                      ),
-                      Text(
-                        '$totalAmount $currencyCode',
-                        style: Theme.of(context).textTheme.titleLarge,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 32),
-                  Text(
-                    'Shipping Address',
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    '${orderData.userName}\n${orderData.address}',
-                    style: Theme.of(context)
-                        .textTheme
-                        .headlineSmall!
-                        .copyWith(height: 1.5),
-                  ),
-                ],
+                ...[
+                Text(
+                  'Order ${orderData.id}',
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+                const SizedBox(height: 16),
+                Row(
+                  children: [
+                    Text(
+                      "Date: ",
+                      style: Theme.of(context).textTheme.headlineSmall,
+                    ),
+                    Text(
+                      " $date at $time",
+                      style: Theme.of(context).textTheme.headlineMedium,
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8),
+                Row(
+                  children: [
+                    Text(
+                      "Total: ",
+                      style: Theme.of(context).textTheme.headlineSmall,
+                    ),
+                    Text(
+                      "${orderData.amount} $currencyCode",
+                      style: Theme.of(context).textTheme.headlineMedium,
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8),
+                Row(
+                  children: [
+                    Text(
+                      "Status: ",
+                      style: Theme.of(context).textTheme.headlineSmall,
+                    ),
+                    Text(
+                      getOrderStatus(orderData.status!),
+                      style: Theme.of(context).textTheme.headlineMedium,
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 16),
+                Text(
+                  'Items :',
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+                const SizedBox(height: 8),
+                // Display each product in the order
+                ...controller.detailsProducts.map((product) {
+                  return orderItemCard(
+                    context,
+                    product.nameEng ?? 'Unknown',      // Product name
+                    product.proQty ?? 0,               // Quantity
+                    double.tryParse(product.proPrice ?? '0') ?? 0,  // Price
+                    product.image ?? '',               // Image URL
+                  );
+                }),
+                const SizedBox(height: 16),
+                Row(
+                  children: [
+                    Text(
+                      'Total Amount: ',
+                      style: Theme.of(context).textTheme.titleSmall,
+                    ),
+                    Text(
+                      '$totalAmount $currencyCode',
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 32),
+                Text(
+                  'Shipping Address',
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  '${orderData.userName}\n${orderData.address}',
+                  style: Theme.of(context)
+                      .textTheme
+                      .headlineSmall!
+                      .copyWith(height: 1.5),
+                ),
+              ],
               ],
             ),
           ),
@@ -152,6 +164,7 @@ class OrderDetailsPage extends GetView<OrderController> {
 
   Widget orderItemCard(BuildContext context, String name, int quantity, double price, String imageUrl) {
     return Container(
+      height: 70,
       margin: const EdgeInsets.only(bottom: 12), // Add some spacing between cards
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
@@ -172,9 +185,9 @@ class OrderDetailsPage extends GetView<OrderController> {
             borderRadius: BorderRadius.circular(8),
             child: Image.network(
               imageUrl,
-              width: 100,
+              width: 250,
               height: 50,
-              fit: BoxFit.cover,
+              fit: BoxFit.fitWidth,
               errorBuilder: (context, error, stackTrace) => const Icon(Icons.error), // Fallback icon
             ),
           ),

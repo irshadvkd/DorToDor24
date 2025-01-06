@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../Helper/colors.dart';
 import '../../Helper/common_button.dart';
-import '../../Helper/common_card.dart';
 
 class EditAddressButton extends StatelessWidget {
   const EditAddressButton({
@@ -110,7 +109,7 @@ class EditAddressButton extends StatelessWidget {
         initialValue: initialValue,
         decoration: InputDecoration(
           labelText: label,
-          border: OutlineInputBorder(),
+          border: const OutlineInputBorder(),
         ),
       ),
     );

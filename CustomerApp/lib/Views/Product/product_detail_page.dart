@@ -3,7 +3,6 @@ import 'package:dorTodor24/Helper/colors.dart';
 import 'package:dorTodor24/Helper/common_app_bar.dart';
 import 'package:dorTodor24/Helper/common_image.dart';
 import 'package:dorTodor24/Helper/string.dart';
-import 'package:dorTodor24/Modals/Product/cart_modal.dart';
 import 'package:dorTodor24/Views/Product/image_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

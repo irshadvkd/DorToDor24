@@ -11,14 +11,14 @@ class CommonDropDownSearch extends StatelessWidget {
   final String? validatorText;
   final bool? enabled;
   CommonDropDownSearch({
-    Key? key,
+    super.key,
     required this.hintText,
     required this.list,
     required this.selected,
     required this.onChange,
     this.validatorText,
     this.enabled,
-  }) : super(key: key);
+  });
 
   final TextEditingController search = TextEditingController();
 
@@ -114,8 +114,8 @@ class CommonDropDownSearch extends StatelessWidget {
           ),
           scrollbarTheme: ScrollbarThemeData(
             radius: const Radius.circular(40),
-            thickness: MaterialStateProperty.all(6),
-            thumbVisibility: MaterialStateProperty.all(true),
+            thickness: WidgetStateProperty.all(6),
+            thumbVisibility: WidgetStateProperty.all(true),
           ),
         ),
         dropdownSearchData: DropdownSearchData(

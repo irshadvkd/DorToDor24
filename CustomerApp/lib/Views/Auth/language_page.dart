@@ -1,10 +1,7 @@
 import 'package:dorTodor24/Controllers/Home/home_controller.dart';
 import 'package:dorTodor24/Helper/colors.dart';
 import 'package:dorTodor24/Helper/common_button.dart';
-import 'package:dorTodor24/Helper/common_card.dart';
 import 'package:dorTodor24/Views/Auth/login_page.dart';
-import 'package:dorTodor24/Views/Auth/phone_no_page.dart';
-import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -317,26 +314,26 @@ class LanguagePage extends GetView<HomeController> {
     showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
-        return Container(
+        return SizedBox(
           height: 200,
           child: Column(
             children: [
               ListTile(
-                title: Text('English'),
+                title: const Text('English'),
                 onTap: () {
                   // _selectLanguage('English');
                   Navigator.pop(context);
                 },
               ),
               ListTile(
-                title: Text('Spanish'),
+                title: const Text('Spanish'),
                 onTap: () {
                   // _selectLanguage('Spanish');
                   Navigator.pop(context);
                 },
               ),
               ListTile(
-                title: Text('French'),
+                title: const Text('French'),
                 onTap: () {
                   // _selectLanguage('French');
                   Navigator.pop(context);

@@ -1,10 +1,8 @@
 import 'package:dorTodor24/Controllers/Product/product_controller.dart';
-import 'package:dorTodor24/Helper/colors.dart';
 import 'package:dorTodor24/Helper/common_app_bar.dart';
 import 'package:dorTodor24/Helper/common_card.dart';
 import 'package:dorTodor24/Helper/common_image.dart';
 import 'package:dorTodor24/Views/Product/product_page.dart';
-import 'package:dorTodor24/Views/Product/product_search_page.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

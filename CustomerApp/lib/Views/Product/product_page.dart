@@ -1,7 +1,6 @@
 import 'package:dorTodor24/Controllers/Product/product_controller.dart';
 import 'package:dorTodor24/Helper/common_app_bar.dart';
 import 'package:dorTodor24/Helper/common_text_field.dart';
-import 'package:dorTodor24/Views/Home/home_app_bar.dart';
 import 'package:dorTodor24/Views/Product/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

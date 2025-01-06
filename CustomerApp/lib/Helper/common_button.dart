@@ -14,7 +14,7 @@ class CommonButton extends StatelessWidget {
   final TextStyle? style;
   final Function() onTap;
   const CommonButton({
-    Key? key,
+    super.key,
     required this.text,
     this.width,
     this.height,
@@ -26,7 +26,7 @@ class CommonButton extends StatelessWidget {
     this.textSize,
     this.textColor,
     required this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
