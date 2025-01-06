@@ -1,8 +1,5 @@
 import 'package:dortodorpartner/Controllers/Home/home_controller.dart';
-import 'package:dortodorpartner/Helper/colors.dart';
 import 'package:dortodorpartner/Helper/common_card.dart';
-import 'package:dortodorpartner/Helper/common_image.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

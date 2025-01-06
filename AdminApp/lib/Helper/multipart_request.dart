@@ -8,10 +8,10 @@ import 'package:http/http.dart' as http;
 class CommonMultipartRequest extends http.MultipartRequest {
   /// Creates a new [MultipartRequest].
   CommonMultipartRequest(
-    String method,
-    Uri url, {
+    super.method,
+    super.url, {
     required this.onProgress,
-  }) : super(method, url);
+  });
 
   final void Function(int bytes, int totalBytes) onProgress;
 

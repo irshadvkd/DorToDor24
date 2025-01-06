@@ -45,7 +45,7 @@ class HomeController extends GetxController {
       prefs.setString('privilege', loginModal.user!.previlage.toString());
       final homeController = Get.put(HomeController());
       homeController.getDashboard(context);
-      Get.to(() => HomeAppBar());
+      Get.to(() => const HomeAppBar());
       // tempStore = storeModalFromJson(response['data']);
       // Get.back();
       // addStoreToList();

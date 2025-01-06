@@ -1,0 +1,1 @@
+ C:\\Users\\DELL\\StudioProjects\\DorToDor24\\AdminApp\\.dart_tool\\flutter_build\\6693355de226cbcdc2da65a07a754501\\native_assets.yaml: 

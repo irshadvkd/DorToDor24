@@ -1,7 +1,6 @@
 import 'package:dortodorpartner/Controllers/Order/order_controller.dart';
 import 'package:dortodorpartner/Helper/common_card.dart';
 import 'package:dortodorpartner/Helper/string.dart';
-import 'package:dortodorpartner/Modals/Order/order_modal.dart';
 import 'package:dortodorpartner/Views/Menu/order_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

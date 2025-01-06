@@ -9,13 +9,13 @@ class CommonEmptyList extends StatelessWidget {
   final String notFoundText;
   final String description;
   const CommonEmptyList({
-    Key? key,
+    super.key,
     required this.condition,
     required this.icon,
     required this.emptyText,
     required this.notFoundText,
     required this.description,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

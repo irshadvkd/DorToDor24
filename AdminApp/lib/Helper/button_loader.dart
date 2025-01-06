@@ -10,7 +10,7 @@ class ButtonLoader extends StatelessWidget {
   final Color? color;
   final Color? textColor;
   const ButtonLoader({
-    Key? key,
+    super.key,
     this.width,
     this.height,
     this.margin,
@@ -18,7 +18,7 @@ class ButtonLoader extends StatelessWidget {
     this.radius,
     this.color,
     this.textColor,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

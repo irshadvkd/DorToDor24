@@ -2,8 +2,6 @@ import 'package:dortodorpartner/Controllers/Product/product_controller.dart';
 import 'package:dortodorpartner/Helper/common_app_bar.dart';
 import 'package:dortodorpartner/Helper/common_image.dart';
 import 'package:dortodorpartner/Helper/common_text_field.dart';
-import 'package:dortodorpartner/Helper/string.dart';
-import 'package:dortodorpartner/Views/Product/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

@@ -2,13 +2,10 @@ import 'dart:convert';
 
 import 'package:dortodorpartner/Controllers/Home/home_controller.dart';
 import 'package:dortodorpartner/Helper/session.dart';
-import 'package:dortodorpartner/Helper/string.dart';
-import 'package:dortodorpartner/Modals/Category/category_modal.dart';
 import 'package:dortodorpartner/Modals/Store/store_location_modal.dart';
 import 'package:dortodorpartner/Modals/Store/store_modal.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class StoreController extends GetxController {
   TextEditingController search = TextEditingController();

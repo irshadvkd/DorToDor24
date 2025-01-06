@@ -4,7 +4,7 @@ import 'package:dortodorpartner/Helper/colors.dart';
 
 class CommonWithOutAppBar extends StatelessWidget {
   final Widget child;
-  const CommonWithOutAppBar({Key? key, required this.child}) : super(key: key);
+  const CommonWithOutAppBar({super.key, required this.child});
 
   @override
   Widget build(BuildContext context) {

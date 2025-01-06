@@ -7,7 +7,6 @@ import 'package:dortodorpartner/Helper/common_button.dart';
 import 'package:dortodorpartner/Helper/common_card.dart';
 import 'package:dortodorpartner/Helper/common_image.dart';
 import 'package:dortodorpartner/Helper/common_text_field.dart';
-import 'package:dortodorpartner/Helper/string.dart';
 import 'package:dortodorpartner/Views/Banner/banner_add_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

@@ -8,11 +8,11 @@ class CommonAppBar extends StatelessWidget {
   final bool? actionEnable;
   final Widget child;
   const CommonAppBar({
-    Key? key,
+    super.key,
     required this.title,
     this.actionEnable,
     required this.child,
-  }) : super(key: key);
+  });
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
